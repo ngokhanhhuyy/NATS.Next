@@ -1,0 +1,91 @@
+:root {
+    --background: #ffffff;
+    --foreground: #171717;
+}
+
+html,
+body {
+    max-width: 100vw;
+    overflow-x: hidden;
+}
+
+body {
+    color: var(--foreground);
+    background: var(--background);
+    font-family: Arial, Helvetica, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+input:not([type="checkbox"]):not(.is-invalid):not(.is-valid),
+textarea:not(.is-invalid):not(.is-valid),
+select:not(.is-invalid):not(.is-valid) {
+    color: inherit !important;
+}
+
+input:not([type="checkbox"]):not(.is-invalid):not(.is-valid),
+textarea:not(.is-invalid):not(.is-valid),
+select:not(.is-invalid):not(.is-valid) {
+    color: inherit !important;
+    background-color: rgba(var(--bs-primary-rgb), 0.01);
+}
+
+input:not([type="checkbox"]):not(.is-invalid):not(.is-valid):focus,
+textarea:not(.is-invalid):not(.is-valid):focus,
+select:not(.is-invalid):not(.is-valid):focus {
+    border-color: var(--bs-primary) !important;
+}
+
+input:not([type="checkbox"]):is(.is-invalid),
+textarea:is(.is-invalid),
+select:is(.is-invalid) {
+    color: var(--bs-danger-text-emphasis) !important;  
+}
+
+input:not([type="checkbox"]):is(.is-valid),
+textarea:is(.is-valid),
+select:is(.is-valid) {
+    color: var(--bs-success-text-emphasis) !important;  
+}
+
+input[type="checkbox"], select {
+    cursor: pointer;
+}
+
+input:not([type="checkbox"])::placeholder,
+textarea::placeholder,
+select::placeholder {
+    color: rgba(0, 0, 0, 0.2) !important;
+}
+
+input:not([type="checkbox"]):is(.is-invalid)::placeholder,
+textarea:is(.is-invalid)::placeholder,
+select:is(.is-invalid)::placeholder {
+    color: rgba(var(--bs-danger-rgb), 0.2) !important;
+}
+
+input:not([type="checkbox"]):is(.is-valid)::placeholder,
+textarea:is(.is-valid)::placeholder,
+select:is(.is-valid)::placeholder {
+    color: rgba(var(--bs-success-rgb), 0.2) !important;
+}
+
+.form-floating label.required::after {
+    content: "*";
+    color: red;
+    margin-left: 5px;
+}
