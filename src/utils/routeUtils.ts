@@ -1,0 +1,11 @@
+export const getHomeRoutePath = () => "/";
+export const getAboutUsRoutePath= () => "/ve-chung-toi";
+export const getSummaryItemsRoutePath = () => "/gioi-thieu";
+export const getServiceListRoutePath = () => "/dich-vu";
+export const getServiceDetailRoutePath = (id: number) => `/dich-vu/${id}`;
+export const getCourseListRoutePath = () => "/khoa-hoc";
+export const getCourseDetailRoutePath = (id: number) => `/khoa-hoc/${id}`;
+export const getProductListRoutePath = () => "san-pham";
+export const getProductDetailRoutePath = (id: number) => `/san-pham/${id}`;
+export const getContactsRoutePath = () => "/lien-he";
+export const getEnquiryRoutePath = () => "/cau-hoi";

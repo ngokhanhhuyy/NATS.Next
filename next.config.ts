@@ -1,6 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+    allowedDevOrigins: [
+        "frontend-workstation.khanhhuy.dev",
+        "frontend.khanhhuy.dev"
+    ],
     async rewrites() {
         return [
             {

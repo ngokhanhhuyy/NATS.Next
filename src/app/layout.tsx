@@ -3,6 +3,10 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+// Child components.
+import NavigationBar from "@/components/frontPages/navigationBar";
+import Footer from "@/components/frontPages/footer";
+
 const geistSans = Geist({
     variable: "--font-geist-sans",
     subsets: ["latin"],
@@ -32,7 +36,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     return (
         <html lang="en">
             <body className={computeClassName()}>
+                <NavigationBar />
                 {children}
+                <Footer />
             </body>
         </html>
     );

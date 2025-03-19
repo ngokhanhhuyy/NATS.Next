@@ -1,12 +1,27 @@
 import { CatalogItemType } from "@/enums/catalogItemType";
 
 declare global {
-    type CatalogItemResponseDto = {
+    type CatalogItemBasicResponseDto = {
         id: number;
         name: string;
         type: CatalogItemType;
         summary: string;
         thumbnailUrl: string | null;
+    };
+
+    type CatalogItemDetailResponseDto = {
+        id: number;
+        name: string;
+        type: CatalogItemType;
+        summary: string;
+        detail: string;
+        thumbnailUrl: string | null;
+        photos: CatalogItemDetailPhotoResponseDto[];
+    }
+
+    type CatalogItemDetailPhotoResponseDto = {
+        id: number;
+        url: string;
     }
 }
 
