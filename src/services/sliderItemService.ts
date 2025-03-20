@@ -71,4 +71,10 @@ async function deleteAsync(id: number): Promise<void> {
     await api.deleteAndIgnoreAsync(`/sliderItem/${id}`);
 }
 
-export { getListAsync, getSingleAsync, createAsync, updateAsync, deleteAsync };
+export {
+    getListAsync as getSliderItemListAsync,
+    getSingleAsync as getSliderItemSingleAsync,
+    createAsync as createSliderItemAsync,
+    updateAsync as updateSliderItemAsync,
+    deleteAsync as deleteSliderItemAsync
+};

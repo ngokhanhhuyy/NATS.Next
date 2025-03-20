@@ -1,4 +1,11 @@
+import { CatalogItemType } from "@/enums/catalogItemType";
+
 declare global {
+    type CatalogItemListRequestDto = Partial<{
+        type: CatalogItemType;
+        excludedIds: number[];
+    }>;
+
     type CatalogItemUpsertRequestDto = {
         name: string;
         summary: string;
@@ -12,7 +19,7 @@ declare global {
         id: number | null;
         file: string;
         isDeleted: boolean;
-    }
+    };
 }
 
 export { };

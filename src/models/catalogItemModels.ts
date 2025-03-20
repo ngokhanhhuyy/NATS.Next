@@ -1,4 +1,8 @@
 import { CatalogItemType } from "@/enums/catalogItemType";
+import {
+    getServiceDetailRoutePath,
+    getCourseDetailRoutePath,
+    getProductDetailRoutePath } from "@/utils/routeUtils";
 
 declare global {
     type CatalogItemBasicModel = {
@@ -7,6 +11,7 @@ declare global {
         type: CatalogItemType;
         summary: string;
         thumbnailUrl: string;
+        detailRoute: string;
     };
 
     type CatalogItemDetailModel = {
@@ -18,6 +23,7 @@ declare global {
         thumbnailUrl: string;
         photos: CatalogItemDetailPhotoModel[];
         otherCatalogItems: CatalogItemBasicModel[];
+        detailRoute: string;
     };
 
     type CatalogItemDetailPhotoModel = {
@@ -34,12 +40,27 @@ type DetailModel = CatalogItemDetailModel;
 type DetailPhotoModel = CatalogItemDetailPhotoModel;
 
 function createBasic(responseDto: BasicResponseDto): BasicModel {
+    let thumbnailUrl = "https://placehold.co/512x512";
+    if (responseDto.type !== CatalogItemType.Course && responseDto.thumbnailUrl) {
+        thumbnailUrl = responseDto.thumbnailUrl;
+    }
+
     return {
         id: responseDto.id,
         name: responseDto.name,
         type: responseDto.type,
         summary: responseDto.summary,
-        thumbnailUrl: responseDto.thumbnailUrl ?? "https://placehold.co/512x512"
+        thumbnailUrl: thumbnailUrl,
+        get detailRoute(): string {
+            switch (this.type) {
+                case CatalogItemType.Service:
+                    return getServiceDetailRoutePath(this.id);
+                case CatalogItemType.Course:
+                    return getCourseDetailRoutePath(this.id);
+                case CatalogItemType.Product:
+                    return getProductDetailRoutePath(this.id);
+            }
+        }
     };
 }
 
@@ -54,7 +75,17 @@ function createDetail(
         detail: detailResponseDto.detail,
         thumbnailUrl: detailResponseDto.thumbnailUrl ?? "https://placehold.co/512x512",
         photos: detailResponseDto.photos.map(dto => createDetailPhoto(dto)),
-        otherCatalogItems: otherCatalogItemResponseDtos.map(dto => createBasic(dto))
+        otherCatalogItems: otherCatalogItemResponseDtos.map(dto => createBasic(dto)),
+        get detailRoute(): string {
+            switch (this.type) {
+                case CatalogItemType.Service:
+                    return getServiceDetailRoutePath(this.id);
+                case CatalogItemType.Course:
+                    return getCourseDetailRoutePath(this.id);
+                case CatalogItemType.Product:
+                    return getProductDetailRoutePath(this.id);
+            }
+        }
     };
 }
 

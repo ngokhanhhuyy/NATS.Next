@@ -3,12 +3,26 @@ import * as api from "./api";
 /**
  * Gets a list of all contacts.
  * 
- * @returns A {@link Promise{T}} representing the asynchronous operation, which result is a an
+ * @returns A {@link Promise{T}} representing the asynchronous operation, which result is an
  * array of DTOs, containing the information of the contacts.
  * @example getListAsync();
  */
 async function getListAsync(): Promise<ContactResponseDto[]> {
     return api.getAsync("/contact");
+}
+
+/**
+ * Get a single contact.
+ *
+ * @param id The id of the contact to retrieve.
+ * @returns A {@link Promise} representing the asynchronous operation, which result is a DTO
+ * containing the information of the contact.
+ * @example getSingleAsync(1);
+ *
+ * @throws {NotFoundError} Throws when the contact specified by {@link id} doesn't exist.
+ */
+async function getSingleAsync(id: number): Promise<ContactResponseDto> {
+    return api.getAsync(`/contact/${id}`);
 }
 
 /**
@@ -57,4 +71,4 @@ async function deleteAsync(id: number): Promise<void> {
     await api.deleteAndIgnoreAsync(`/contact/${id}`);
 }
 
-export { getListAsync, createAsync, updateAsync, deleteAsync };
+export { getListAsync, getSingleAsync, createAsync, updateAsync, deleteAsync };

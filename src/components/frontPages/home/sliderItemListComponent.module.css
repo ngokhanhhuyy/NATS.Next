@@ -1,0 +1,4 @@
+.sliderItemThumbnail {
+    max-height: 750px;
+    object-fit: cover;
+}

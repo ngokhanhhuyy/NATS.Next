@@ -97,6 +97,19 @@ export default async function Footer() {
                             {generalSettings.applicationName}
                         </div>
                     </div>
+
+                    {/* Copyright */}
+                    <div className="col col-12 text-center">
+                        Bản quyền ©2025&nbsp;
+                        <a
+                            href="https://facebook.com/huy.nino.97"
+                            className="fw-bold"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            Ngô Khánh Huy
+                        </a>.
+                    </div>
                 </div>
             </div>
         </footer>
