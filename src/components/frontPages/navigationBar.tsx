@@ -3,11 +3,12 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import * as routeUtils from "@/utils/routeUtils";
+import styles from "./navigationBar.module.css";
 
 export default function NavigationBar() {
     return (
         <nav
-            className="navbar navbar-expand-xl fixed-top shadow fs-5"
+            className={`navbar navbar-expand-xl fixed-top shadow fs-5 ${styles.nav}`}
             id="navbar"
             data-bs-theme="light"
         >
@@ -15,17 +16,21 @@ export default function NavigationBar() {
                 {/* Main logo */}
                 <Link
                     href={routeUtils.getHomeRoutePath()}
-                    className="navbar-brand d-flex align-items-center"
+                    className={`navbar-brand d-flex align-items-center ${styles.logo}`}
                 >
                     <Image
                         src="/images/main-logo-transparent-white-without-text.png"
-                        className="me-2 flex-shrink-0"
+                        className={`me-2 flex-shrink-0 ${styles.logo}`}
                         alt="Main Logo"
+                        width={48}
+                        height={48}
                     />
-                    <span className="fs-2 application-short-name">NATS</span>
+                    <span className={`fs-2 ${styles.applicationShortName}`}>
+                        NATS
+                    </span>
                 </Link>
                 <button
-                    className="navbar-toggler fs-3 me-2 py-2"
+                    className={`navbar-toggler fs-3 me-2 py-2 ${styles.togglerButton}`}
                     id="navbar-toggler-button"
                     type="button"
                     data-bs-toggle="offcanvas"
@@ -54,8 +59,8 @@ export default function NavigationBar() {
                         </button>
                     </div>
                     <div className="offcanvas-body">
-                        <ul className="navbar-nav me-auto mb-2 mb-lg-0
-                                        justify-content-end w-100">
+                        <ul className={`navbar-nav me-auto mb-2 mb-lg-0 justify-content-end
+                                        w-100 ${styles["itemContainerList"]}`}>
                             {/* Home */}
                             <NavigationItem path={routeUtils.getHomeRoutePath()}>
                                 Trang chủ
@@ -104,11 +109,12 @@ function NavigationItem(props: { path: string, children: React.ReactNode }) {
 
     // Computed.
     const computeItemClassName = (): string => {
-        if (pathName.startsWith(pathName)) {
-            return "active";
+        const classNames = [styles.link];
+        if (pathName.startsWith(props.path)) {
+            classNames.push("active");
         }
 
-        return "";
+        return classNames.join(" ");
     };
 
     return (

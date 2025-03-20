@@ -1,13 +1,19 @@
-import * as authenticationService from "@/services/authenticationService";
+import type { Metadata } from "next";
+import { getListAsync as getSliderItemListAsync } from "@/services/sliderItemService";
+import { getListAsync as getSummaryItemListAsync } from "@/services/summaryItemService";
+import { getAsync as getAboutUsIntroductionAsync }
+    from "@/services/aboutUsIntroductionService";
 import styles from "./page.module.css";
-import TestingAuthenticationComponent from "@/components/frontPages/home/testingAuthentication";
+
+export const metadata: Metadata = {
+    title: "Trang chủ",
+};
 
 export default async function Home() {
-    const isAuthenticated = await authenticationService.checkAuthenticationStatusAsync();
-    return (
-        <div className={styles.page}>
-            <span>{isAuthenticated}</span>
-            <TestingAuthenticationComponent />
-        </div>
-    );
-}
+    const responseDtos = await Promise.all([
+        getSliderItemListAsync(),
+        getSummaryItemListAsync(),
+        getAboutUsIntroductionAsync(),
+
+    ]);
+};

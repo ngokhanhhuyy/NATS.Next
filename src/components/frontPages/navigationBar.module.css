@@ -1,0 +1,91 @@
+.nav {
+    --navbar-logo-img-filter:
+        brightness(0)
+        saturate(100%)
+        invert(39%)
+        sepia(90%)
+        saturate(393%)
+        hue-rotate(100deg)
+        brightness(88%)
+        contrast(89%);
+    --navbar-transition-duration: 0.3s;
+    --navbar-background-color: var(--bs-white);
+    --navbar-foreground-color: var(--bs-success);
+    background: var(--navbar-background-color);
+    height: var(--navbar-height);
+    transition: background-color var(--navbar-transition-duration) ease;
+}
+
+.logo {
+    width: auto;
+    height: calc(var(--navbar-height) - 12px);
+    padding: 5px;
+    filter: var(--navbar-logo-img-filter);
+    transition: filter var(--navbar-transition-duration) ease;
+}
+
+.applicationShortName {
+    font-family: Arial, serif;
+    color: var(--navbar-foreground-color);
+    transform: scaleX(110%);
+    transform-origin: 0;
+    transition: color var(--navbar-transition-duration) ease;
+}
+
+.togglerButton {
+    color: var(--navbar-foreground-color) !important;
+    border-color: var(--navbar-foreground-color) !important;
+    transition: var(--navbar-transition-duration) ease !important;
+}
+
+.togglerButton:hover {
+    background-color: var(--navbar-foreground-color) !important;
+    color: var(--navbar-background-color) !important;
+}
+
+.itemListContainer {
+    --bs-nav-link-color: var(--navbar-foreground-color) !important;
+    --bs-nav-link-hover-color: var(--navbar-foreground-color) !important;
+    --bs-navbar-active-color: var(--navbar-foreground-color) !important;
+}
+
+.nav :global(.navbar-nav) {
+    --bs-nav-link-padding-x: .5rem;
+    --bs-nav-link-padding-y: .15rem;
+}
+
+.link {
+    color: var(--bs-success);
+    margin-right: 15px;
+    margin-top: 1px !important;
+    margin-bottom: 1px !important;
+    border-radius: .5rem;
+    border: 1px solid transparent;
+    text-decoration: none !important;
+}
+
+.link:hover {
+    background-color: rgba(var(--bs-success-rgb), 0.15);
+    border-color: rgba(var(--bs-success-rgb), 0.5);
+}
+
+.link, .link:hover {
+    color: var(--bs-success);
+}
+
+:global(.active).link {
+    background-color: var(--navbar-foreground-color) !important;
+    color: var(--navbar-background-color) !important;
+}
+
+@media (max-width: 1200px) {
+    .nav {
+        height: auto !important;
+    }
+}
+
+@media (max-width: 992px) {
+    .nav :global(.offcanvas) {
+        max-width: 300px;
+    }
+}

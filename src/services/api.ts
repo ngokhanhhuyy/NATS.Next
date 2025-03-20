@@ -90,13 +90,13 @@ export async function executeAsync(
         delay: number = 300,
         abortSignal: AbortSignal | null = null): Promise<Response> {
     // Determining the API's endpoint url.
+    const isServer = typeof window === "undefined";
     let endpointUrl;
-    if (typeof window === "undefined") {
+    if (isServer) {
         endpointUrl = process.env.API_URL + endpointPath;
     } else {
         endpointUrl = "/api" + endpointPath;
     }
-    console.log(endpointUrl);
 
     if (params != null && getQueryString(params) != null) {
         endpointUrl += "?" + getQueryString(params);
@@ -114,10 +114,15 @@ export async function executeAsync(
     }
 
     const sendRequest = async () => fetch(endpointUrl, requestInit);
-    const [response] = await Promise.all([
-        sendRequest(),
-        new Promise(resolve => setTimeout(resolve, delay))
-    ]);
+    let response: Response;
+    if (!isServer) {
+        [response] = await Promise.all([
+            sendRequest(),
+            new Promise(resolve => setTimeout(resolve, delay))
+        ]);
+    } else {
+        response = await sendRequest();
+    }
 
     if (response.ok) {
         return response;

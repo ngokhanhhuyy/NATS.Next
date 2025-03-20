@@ -1,0 +1,25 @@
+.footer :global(a) {
+    color: white !important;
+}
+
+.footer :global(a:not(:hover)) {
+    text-decoration: none;
+}
+
+.linksColumn :global(a) {
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+    display: block;
+}
+
+.logoContainer {
+    width: 150px;
+    height: auto;
+    aspect-ratio: 1;
+}
+
+.logoContainer :global(img) {
+    width: 65%;
+    height: auto;
+    aspect-ratio: 1;
+}

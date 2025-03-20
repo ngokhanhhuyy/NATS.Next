@@ -36,9 +36,9 @@ async function fileToBase64Strings(file: File): Promise<[string, string]> {
  * @returns The fullpath of the image, containing the server domain.
  */
 function getPhotoUrl(url: string): string {
-    if (url.startsWith("/images/") && typeof window === "undefined") {
-        return `${process.env.IMG_URL}/${url}`;
-    }
+    // if (url.startsWith("/images") && typeof window === "undefined") {
+    //     return `${process.env.IMG_URL}/${url.replace("/images", "")}`;
+    // }
 
     return url;
 }
