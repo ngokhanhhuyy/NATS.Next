@@ -44,4 +44,8 @@ async function updateAsync(
     await api.putAndIgnoreAsync(`/summaryItem/${id}`, requestDto);
 }
 
-export { getListAsync, getSingleAsync, updateAsync };
+export {
+    getListAsync as getSummaryItemListAsync,
+    getSingleAsync as getSummaryItemSingleAsync,
+    updateAsync as updateSummaryItemAsync
+};

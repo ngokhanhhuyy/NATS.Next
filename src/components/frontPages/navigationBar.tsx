@@ -110,7 +110,8 @@ function NavigationItem(props: { path: string, children: React.ReactNode }) {
     // Computed.
     const computeItemClassName = (): string => {
         const classNames = [styles.link];
-        if (pathName.startsWith(props.path)) {
+        if ((pathName === "/" && props.path === "/") ||
+            (props.path !== "/" && pathName.startsWith(props.path))) {
             classNames.push("active");
         }
 

@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { createEnquiryCreateModel } from "@/models/enquiryModels";
-import styles from "./enquiryFormCompoent.module.css";
+import styles from "./enquiryFormComponent.module.css";
 
 export default function EnquiryForm() {
     // Model and states.

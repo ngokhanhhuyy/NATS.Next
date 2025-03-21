@@ -1,7 +1,8 @@
+import type { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { getListAsync as getContactListAsync } from "@/services/contactService";
-import { getAsync as getGeneralSettingsAsync } from "@/services/generalSettingsService";
+import { getContactListAsync } from "@/services/contactService";
+import { getGeneralSettingsAsync } from "@/services/generalSettingsService";
 import { ContactType } from "@/enums/contactType";
 import { createContactDetailModel } from "@/models/contactModels";
 import { createGeneralSettingsDetailModel } from "@/models/generalSettingsModels";
@@ -9,16 +10,33 @@ import { getPhotoUrl } from "@/utils/photoUtils";
 import * as routeUtils from "@/utils/routeUtils";
 import styles from "./footer.module.css";
 
+// Props.
+type Model = {
+    contacts: ContactDetailModel[];
+    generalSettings: GeneralSettingsDetailModel;
+}
 
-export default async function Footer() {
+type FooterProps = {
+    model: Model;
+}
+
+export const getServerSideProps = (async () => {
     const [contactResponseDtos, generalSettingsResponseDto] = await Promise.all([
         getContactListAsync(),
         getGeneralSettingsAsync()
     ]);
 
-    const contacts = contactResponseDtos.map(dto => createContactDetailModel(dto));
-    const generalSettings = createGeneralSettingsDetailModel(generalSettingsResponseDto);
+    return {
+        props: {
+            model: {
+                contacts: contactResponseDtos.map(dto => createContactDetailModel(dto)),
+                generalSettings: createGeneralSettingsDetailModel(generalSettingsResponseDto)
+            }
+        }
+    };
+}) satisfies GetServerSideProps<FooterProps>;
 
+export default function Footer(props: InferGetServerSidePropsType<typeof getServerSideProps>) {
     return (
         <footer className={`container-fluid bg-dark ${styles.footer}`} id="footer">
             <div className="container text-white">
@@ -53,7 +71,8 @@ export default async function Footer() {
                     </div>
                     
                     {/* Links - Right/Bottom column */} 
-                    <div className={`col col-xl-2 col-lg-3 col-sm-6 col-12 ${styles.linksColumn}`}>
+                    <div className={`col col-xl-2 col-lg-3 col-sm-6 col-12
+                                    ${styles.linksColumn}`}>
                         <span className="fw-bold fs-5 opacity-75">
                             Lĩnh vực
                         </span>
@@ -74,7 +93,9 @@ export default async function Footer() {
                         <span className="fw-bold fs-5 opacity-75">
                             Liên hệ
                         </span>
-                        {contacts.map(contact => <Contact model={contact} key={contact.id} />)}
+                        {props.model.contacts.map(contact => (
+                            <Contact model={contact} key={contact.id} />
+                        ))}
                     </div>
                     
 
@@ -94,7 +115,7 @@ export default async function Footer() {
                         </div>
                         
                         <div className="fw-bold fs-5 text-center mt-3 text-white">
-                            {generalSettings.applicationName}
+                            {props.model.generalSettings.applicationName}
                         </div>
                     </div>
 

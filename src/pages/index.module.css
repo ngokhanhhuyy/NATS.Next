@@ -21,10 +21,6 @@
     object-position: 50% 50%;
 }
 
-#home-view button[type="submit"]:hover {
-    color: white !important;
-}
-
 @media (max-width: 576px) {
     .applicationNameContainer {
         font-size: 1.0em;

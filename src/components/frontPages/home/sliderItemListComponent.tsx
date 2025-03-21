@@ -12,19 +12,22 @@ interface Props {
 export default function SliderItemList(props: Props) {
     // States.
     const templateRef = useRef<HTMLDivElement | null>(null);
+    const carouselControllerRef = useRef<Carousel | null>(null);
 
-    // Effect.
-    useEffect(() => {
-        let carousel: Carousel;
-        import("bootstrap").then(({ Carousel }) => {
-            carousel = new Carousel(templateRef.current!, { interval: 2000 });
-            carousel.cycle();
-        });
+    // // Effect.
+    // useEffect(() => {
+    //     console.log(templateRef.current);
+    //     import("bootstrap").then(({ Carousel }) => {
+    //         carouselControllerRef.current = new Carousel(templateRef.current!, {
+    //             interval: 2000
+    //         });
+    //         carouselControllerRef.current.cycle();
+    //     });
 
-        return () => {
-            carousel.dispose();
-        };
-    }, []);
+    //     return () => {
+    //         carouselControllerRef.current?.dispose();
+    //     };
+    // }, []);
 
     // Computed.
     function computeItemClassName(index: number): string {
@@ -35,6 +38,7 @@ export default function SliderItemList(props: Props) {
         <div
             className="carousel slide overflow-visible m-0 w-100 position-relative"
             ref={templateRef}
+            id="sliderItemList"
         >
             {/* Photos */}
             <div className="carousel-inner">
@@ -59,7 +63,7 @@ export default function SliderItemList(props: Props) {
                     <button
                         type="button"
                         className={computeItemClassName(index)}
-                        data-bs-target="#slider"
+                        data-bs-target="#sliderItemList"
                         data-bs-slide-to={index}
                         aria-current={index == 0}
                         aria-label={`Slider ${index + 1}`}
@@ -72,7 +76,7 @@ export default function SliderItemList(props: Props) {
             <button
                 className="carousel-control-prev"
                 type="button"
-                data-bs-target="#slider"
+                data-bs-target="#sliderItemList"
                 data-bs-slide="prev"
             >
                 <span className="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -81,7 +85,7 @@ export default function SliderItemList(props: Props) {
             <button
                 className="carousel-control-next"
                 type="button"
-                data-bs-target="#slider"
+                data-bs-target="#sliderItemList"
                 data-bs-slide="next"
             >
                 <span className="carousel-control-next-icon" aria-hidden="true"></span>

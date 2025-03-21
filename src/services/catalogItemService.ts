@@ -71,4 +71,10 @@ async function deleteAsync(id: number): Promise<void> {
     await api.deleteAndIgnoreAsync(`/catalogItem/${id}`);
 }
 
-export { getListAsync, getDetailAsync, createAsync, updateAsync, deleteAsync };
+export {
+    getListAsync as getCatalogItemListAsync,
+    getDetailAsync as getCatalogItemDetailAsync,
+    createAsync as createCatalogItemAsync,
+    updateAsync as updateCatalogItemAsync,
+    deleteAsync as deleteCatalogItemAsync
+};

@@ -71,4 +71,10 @@ async function deleteAsync(id: number): Promise<void> {
     await api.deleteAndIgnoreAsync(`/contact/${id}`);
 }
 
-export { getListAsync, getSingleAsync, createAsync, updateAsync, deleteAsync };
+export {
+    getListAsync as getContactListAsync,
+    getSingleAsync as getContactSingleAsync,
+    createAsync as createContactAsync,
+    updateAsync as updateContactAsync,
+    deleteAsync as deleteContactAsync
+};

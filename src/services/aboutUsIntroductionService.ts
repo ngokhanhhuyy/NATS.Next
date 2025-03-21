@@ -25,4 +25,7 @@ async function updateAsync(requestDto: AboutUsIntroductionUpdateRequestDto): Pro
     await api.postAsync("/aboutUsIntroduction", requestDto);
 }
 
-export { getAsync, updateAsync };
+export {
+    getAsync as getAboutUsIntroductionAsync,
+    updateAsync as updateAboutUsIntroductionAsync
+};

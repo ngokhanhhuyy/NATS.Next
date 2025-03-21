@@ -25,4 +25,7 @@ async function updateAsync(requestDto: GeneralSettingsUpdatetRequestDto): Promis
     return await api.putAndIgnoreAsync("/generalSettings", requestDto);
 }
 
-export { getAsync, updateAsync };
+export {
+    getAsync as getGeneralSettingsAsync,
+    updateAsync as updateGeneralSettingsAsync
+};

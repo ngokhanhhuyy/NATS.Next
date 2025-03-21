@@ -12,6 +12,10 @@ const nextConfig: NextConfig = {
                 source: "/images/:path*",
                 destination: "http://localhost:5000/images/:path*",
             },
+            {
+                source: "/ve-chung-toi/:path*",
+                destination: "/aboutUs/:path*"
+            }
         ];
     },
     images: {
