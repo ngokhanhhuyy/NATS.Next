@@ -9,7 +9,7 @@ import { createCertificateDetailModel } from "@/models/certificateModels";
 import styles from "./index.module.css";
 
 // Layout components.
-import FrontPageSubPageLayout from "../../../components/layout/frontPages/frontPageSubPageLayout";
+import FrontPageSubPageLayout from "@/components/layout/frontPages/frontPageSubPageLayout";
 
 // Type.
 type Model = {
@@ -40,7 +40,8 @@ export const getServerSideProps = (async () => {
 }) satisfies GetServerSideProps<{ model: Model }>;
 
 // Component.
-export default function AboutUs(props: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function AboutUsPage(
+        props: InferGetServerSidePropsType<typeof getServerSideProps>) {
     const aboutUsModel = props.model.aboutUsIntroduction;
     const aboutUsParagraphs = splitToParagraphs(aboutUsModel.aboutUsContent);
     const whyChooseUsParagraphs = splitToParagraphs(aboutUsModel.whyChooseUsContent);
@@ -53,7 +54,11 @@ export default function AboutUs(props: InferGetServerSidePropsType<typeof getSer
     }
 
     return (
-        <FrontPageSubPageLayout title="Về chúng tôi">
+        <FrontPageSubPageLayout
+            title="Về chúng tôi"
+            description="Về chúng tôi"
+            renderEnquiryForm={false}
+        >
             <div className="container p-5">
                 {/* MainContent */}
                 <div className="row g-5 justify-content-center">

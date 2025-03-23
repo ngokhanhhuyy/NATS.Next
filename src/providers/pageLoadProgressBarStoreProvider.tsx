@@ -1,4 +1,3 @@
-"use client";
 import { useEffect, createContext, useRef, useContext, type ReactNode } from "react";
 import { useRouter } from "next/router";
 import { useStore } from "zustand";

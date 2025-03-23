@@ -16,11 +16,12 @@ import styles from "./index.module.css";
 
 // Layout component.
 import PageLoadFinisher from "@/components/layout/pageLoadFinisherComponent";
-import FrontPageLayout from "../../components/layout/frontPages/frontPageLayout";
+import FrontPageLayout from "../../../components/layout/frontPages/frontPageLayout";
 
 // Child components.
-import SliderItemList from "@/pages/home/sliderItemListComponent";
-import CatalogItemList from "@/pages/home/catalogItemListComponent";
+import SliderItemList from "./sliderItemListComponent";
+import SummaryItemList from "./summaryItemListComponent";
+import CatalogItemList from "./catalogItemListComponent";
 import EnquiryForm from "@/components/layout/frontPages/enquiryFormComponent";
 
 // Props.
@@ -78,7 +79,7 @@ export async function getServerSideProps() {
 // Component.
 export default function Home(props: HomeProps) {
     return (
-        <FrontPageLayout>
+        <FrontPageLayout title="Trang chủ" description="Trang chủ">
             <PageLoadFinisher />
             <div className="container-fluid p-0">
                 <SliderItemList model={props.model.sliderItems} />
@@ -91,32 +92,7 @@ export default function Home(props: HomeProps) {
                 </div>
 
                 {/* SummaryItems */}
-                <div className="container my-5">
-                    <div className="row g-3">
-                        {props.model.summaryItems.map((item, index) => (
-                            <div
-                                className="col col-xl-3 col-md-6 col-12 p-3
-                                            d-flex flex-column align-items-center"
-                                key={index}
-                            >
-                                <Image
-                                    className={`rounded-circle mb-3 shadow
-                                                ${styles.summaryItemThumbnail}`}
-                                    src={item.thumbnailUrl}
-                                    width={150}
-                                    height={150}
-                                    alt={item.name}
-                                />
-
-                                <span className="fs-3 text-center text-success mb-3">
-                                    {item.name}
-                                </span>
-
-                                <p>{item.summaryContent}</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
+                <SummaryItemList model={props.model.summaryItems} />
 
                 {/* AboutUsIntroduction */}
                 <div className="container-fluid bg-success text-white fs-5 my-5 shadow">
@@ -154,7 +130,7 @@ export default function Home(props: HomeProps) {
                 <div className="container my-5 px-3" id="catalog-item-container">
                     <CatalogItemList title="Dịch vụ" model={props.model.services} />
                     <CatalogItemList title="Khoá học" model={props.model.courses} />
-                    <CatalogItemList title="Sản phẩm" model={props.model.products} />
+                    {/* <CatalogItemList title="Sản phẩm" model={props.model.products} /> */}
                 </div>
 
                 {/* Enquiry */}

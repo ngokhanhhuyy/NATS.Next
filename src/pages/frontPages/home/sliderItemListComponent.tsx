@@ -22,10 +22,6 @@ export default function SliderItemList(props: Props) {
             });
             carouselControllerRef.current.cycle();
         });
-
-        return () => {
-            carouselControllerRef.current?.dispose();
-        };
     }, []);
 
     // Computed.
@@ -48,8 +44,7 @@ export default function SliderItemList(props: Props) {
                     >
                         <img
                             src={sliderItem.thumbnailUrl}
-                            className={`carousel-img d-block w-100
-                                        ${styles.sliderItemThumbnail}`}
+                            className={`carousel-img d-block w-100 ${styles.thumbnail}`}
                             alt={sliderItem.title}
                         />
                     </div>

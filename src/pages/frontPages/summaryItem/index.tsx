@@ -1,15 +1,24 @@
+import { useEffect, type CSSProperties } from "react";
 import Head from "next/head";
-import type { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import { useRouter } from "next/router";
+import type { GetServerSideProps } from "next";
 import { getSummaryItemListAsync } from "@/services/summaryItemService";
 import { createSummaryItemDetailModel } from "@/models/summaryItemModel";
+import styles from "./index.module.css";
 
 // Layout components.
 import FrontPageSubPageLayout from "@/components/layout/frontPages/frontPageSubPageLayout";
 
-// Child component.
-import Item from "./itemComponent";
-
 // Props.
+type SummaryItemPageProps = {
+    model: SummaryItemDetailModel[];
+}
+
+type ItemProps = {
+    model: SummaryItemDetailModel;
+    index: number;
+}
+
 export const getServerSideProps = (async () => {
     const responseDtos = await getSummaryItemListAsync();
 
@@ -18,23 +27,99 @@ export const getServerSideProps = (async () => {
             model: responseDtos.map(dto => createSummaryItemDetailModel(dto))
         }
     };
-}) satisfies GetServerSideProps<{ model: SummaryItemDetailModel[] }>;
+}) satisfies GetServerSideProps<SummaryItemPageProps>;
 
 // Component.
-export default function SummaryItemPage(
-        props: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function SummaryItemPage(props: SummaryItemPageProps) {
+    // Dependencies.
+    const router = useRouter();
+
+    // Effect.
+    useEffect(() => {
+        if (router.asPath.includes("#")) {
+            const itemId = router.asPath.split("#")[0];
+            const itemElement = document.getElementById(itemId);
+            if (itemElement) {
+                itemElement.scrollIntoView({ behavior: "smooth" });
+            }
+        }
+    }, []);
+
     return (
-        <FrontPageSubPageLayout>
+        <FrontPageSubPageLayout title="Giới thiệu">
             <Head>
                 <title>Giới thiệu</title>
                 <meta name="description" content="Giới thiệu về lĩnh vực hoạt động." />
             </Head>
 
-            <div className="container py-4 mt-4" id="summary-item-view">
+            <div className="container py-4 mt-4">
                 {props.model.map((item, index) => (
                     <Item model={item} index={index} key={index} />
                 ))}
             </div>
         </FrontPageSubPageLayout>
+    );
+}
+
+function Item(props: ItemProps) {
+    // Computed.
+    function computeThumbnailStyle(): CSSProperties {
+        return {
+            width: 250,
+            height: "auto",
+            aspectRatio: 1,
+            objectFit: "cover",
+            objectPosition: "50%"
+        };
+    }
+
+    function computeThumbnailColumnClassName(): string {
+        return `order-lg-${props.index % 2}`;
+    }
+
+    function computeDetailColumnClassName(): string {
+        return `order-lg-${(props.index + 1) % 2}`;
+    }
+
+    function computeNameClassName(): string {
+        let className: string = "text-center";
+        if (props.index % 2 == 0) {
+            className += " text-lg-start";
+        } else {
+            className += " text-lg-end";
+        }
+
+        return className;
+    }
+
+    return (
+        <div
+            className={`row g-5 justify-content-center mb-5 ${styles.itemRow}`}
+            id={props.model.id.toString()}
+        >
+            {/* Thumbnail */}
+            <div className={`col col-lg-auto col-md-10 col-12 d-flex justify-content-center
+                            align-items-start ${computeThumbnailColumnClassName()}`}>
+                <img
+                    src={props.model.thumbnailUrl}
+                    className="rounded-circle shadow"
+                    style={computeThumbnailStyle()}
+                    alt={props.model.name}
+                />
+            </div>
+
+            {/* Detail */}
+            <div className={`col col-lg col-md-10 col-12 ${computeDetailColumnClassName()}`}>
+                {/* Name */}
+                <div className={`fs-2 text-success mb-3 ${computeNameClassName()}`}>
+                    {props.model.name}
+                </div>
+
+                {/* DetailContent */}
+                {props.model.detailContent.split(/\r?\n/).map((paragraph, index) => (
+                    <p key={index}>{paragraph}</p>
+                ))}
+            </div>
+        </div>
     );
 }

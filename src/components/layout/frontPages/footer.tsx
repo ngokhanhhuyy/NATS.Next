@@ -1,4 +1,4 @@
-import type { GetServerSideProps, InferGetServerSidePropsType } from "next";
+import { useState, useEffect, startTransition } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { getContactListAsync } from "@/services/contactService";
@@ -16,29 +16,27 @@ type Model = {
     generalSettings: GeneralSettingsDetailModel;
 }
 
-type FooterProps = {
-    model: Model;
-}
+export default function Footer() {
+    // States.
+    const [model, setModel] = useState<Model>();
 
-export const getServerSideProps = (async () => {
-    const [contactResponseDtos, generalSettingsResponseDto] = await Promise.all([
-        getContactListAsync(),
-        getGeneralSettingsAsync()
-    ]);
+    // Effect.
+    useEffect(() => {
+        startTransition(async () => {
+            const [contactResponseDtos, generalSettingsResponseDto] = await Promise.all([
+                getContactListAsync(),
+                getGeneralSettingsAsync()
+            ]);
 
-    return {
-        props: {
-            model: {
+            setModel({
                 contacts: contactResponseDtos.map(dto => createContactDetailModel(dto)),
                 generalSettings: createGeneralSettingsDetailModel(generalSettingsResponseDto)
-            }
-        }
-    };
-}) satisfies GetServerSideProps<FooterProps>;
+            });
+        });
+    }, []);
 
-export default function Footer(props: InferGetServerSidePropsType<typeof getServerSideProps>) {
     return (
-        <footer className={`container-fluid bg-dark ${styles.footer}`} id="footer">
+        <footer className={`container-fluid bg-dark ${styles.footer}`}>
             <div className="container text-white">
                 <div className="row gx-4 gy-5 justify-content-center
                                 align-items-stretch px-3 py-5 pb-4">
@@ -55,7 +53,7 @@ export default function Footer(props: InferGetServerSidePropsType<typeof getServ
                         </Link>
                         
                         {/* AboutUs */}
-                        <Link href={routeUtils.getAboutUsRoutePath()}>
+                        <Link href={routeUtils.getAboutUsIntroductionRoutePath()}>
                             Về chúng tôi
                         </Link>
                 
@@ -93,7 +91,7 @@ export default function Footer(props: InferGetServerSidePropsType<typeof getServ
                         <span className="fw-bold fs-5 opacity-75">
                             Liên hệ
                         </span>
-                        {props.model.contacts.map(contact => (
+                        {model?.contacts.map(contact => (
                             <Contact model={contact} key={contact.id} />
                         ))}
                     </div>
@@ -107,15 +105,16 @@ export default function Footer(props: InferGetServerSidePropsType<typeof getServ
                                         ${styles.logoContainer}`}
                         >
                             <Image
-                                src={getPhotoUrl("/images/main-logo-transparent-white.png")}
-                                width={500}
-                                height={500}
+                                src="/images/main-logo-transparent-white.png"
+                                width={1}
+                                height={1}
+                                sizes="100vw auto"
                                 alt="Logo"
                             />
                         </div>
                         
                         <div className="fw-bold fs-5 text-center mt-3 text-white">
-                            {props.model.generalSettings.applicationName}
+                            {model?.generalSettings.applicationName}
                         </div>
                     </div>
 

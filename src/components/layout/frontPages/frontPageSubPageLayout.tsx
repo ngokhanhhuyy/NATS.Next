@@ -1,19 +1,18 @@
-import { ReactNode } from "react";
 import styles from "./frontPageSubPageLayout.module.css";
 
 // Layout components.
-import FrontPageLayout from "./frontPageLayout";
+import FrontPageLayout, { type FrontPageLayoutProps } from "./frontPageLayout";
+import EnquiryForm from "@/components/layout/frontPages/enquiryFormComponent";
 
 // Props.
 type FrontPageSubPageLayoutProps = {
-    title: string;
-    children: ReactNode | ReactNode[];
-}
+    renderEnquiryForm?: boolean;
+} & FrontPageLayoutProps;
 
 // Component.
 export default function FrontPageSubPageLayout(props: FrontPageSubPageLayoutProps) {
     return (
-        <FrontPageLayout>
+        <FrontPageLayout title={props.title} description={props.title}>
             <div className={`container-fluid bg-success-subtle text-white border-bottom
                             border-success p-5 ${styles.titleContainer}`}>
                 <div className="container p-3">
@@ -23,6 +22,8 @@ export default function FrontPageSubPageLayout(props: FrontPageSubPageLayoutProp
                 </div>
             </div>
             {props.children}
+
+            {(props.renderEnquiryForm == null || props.renderEnquiryForm) && <EnquiryForm />}
         </FrontPageLayout>
     );
 }

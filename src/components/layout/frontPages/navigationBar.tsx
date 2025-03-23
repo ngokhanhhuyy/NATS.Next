@@ -1,4 +1,4 @@
-"use client";
+import type { ReactNode } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -72,7 +72,7 @@ export default function NavigationBar() {
                             </NavigationItem>
                             
                             {/* AboutUsIntroduction */}
-                            <NavigationItem path={routeUtils.getAboutUsRoutePath()}>
+                            <NavigationItem path={routeUtils.getAboutUsIntroductionRoutePath()}>
                                 Về chúng tôi
                             </NavigationItem>
                             
@@ -87,9 +87,9 @@ export default function NavigationBar() {
                             </NavigationItem>
                             
                             {/* CatalogItem - Product */}
-                            <NavigationItem path={routeUtils.getProductListRoutePath()}>
+                            {/* <NavigationItem path={routeUtils.getProductListRoutePath()}>
                                 Sản phẩm
-                            </NavigationItem>
+                            </NavigationItem> */}
                             
                             {/* Contacts */}
                             <NavigationItem path={routeUtils.getContactsRoutePath()}>
@@ -103,13 +103,13 @@ export default function NavigationBar() {
     );
 }
 
-function NavigationItem(props: { path: string, children: React.ReactNode }) {
+function NavigationItem(props: { path: string, children: ReactNode }) {
     // Dependencies.
     const pathName = usePathname();
 
     // Computed.
     const computeItemClassName = (): string => {
-        const classNames = [styles.link];
+        const classNames: string[] = [styles.link];
         if ((pathName === "/" && props.path === "/") ||
             (props.path !== "/" && pathName.startsWith(props.path))) {
             classNames.push("active");

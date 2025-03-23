@@ -1,4 +1,3 @@
-"use client";
 import { usePageLoadProgressBarStore } from "@/providers/pageLoadProgressBarStoreProvider";
 import styles from "./pageLoadProgressBarComponent.module.css";
 
@@ -9,13 +8,13 @@ const progressBarClassNames = {
     hiding: styles.hiding
 };
 
-const PageLoadProgressBarComponent = () => {
+export default function PageLoadProgressBarComponent() {
     // Dependencies.
     const store = usePageLoadProgressBarStore(store => store);
 
     return (
         <div
-            className={`progress w-100 ${styles.progress} rounded-0`}
+            className={`progress w-100 rounded-0 ${styles.progress}`}
             role="progressbar"
             aria-label="Animated striped example"
             aria-valuenow={store.percentage}
@@ -24,12 +23,9 @@ const PageLoadProgressBarComponent = () => {
         >
             <div
                 className={`progress-bar progress-bar-striped progress-bar-animated h-100
-                            ${styles.progressBar}
-                            ${progressBarClassNames[store.phase]}`}
+                            ${styles.progressBar} ${progressBarClassNames[store.phase]}`}
                 style={{ width: `${store.percentage}%` }}
             />
         </div>
     );
 };
-
-export default PageLoadProgressBarComponent;

@@ -1,25 +1,35 @@
 import type { ReactNode } from "react";
+import { usePathname } from "next/navigation";
+import Head from "next/head";
 
 // Layout components.
-import RootLayout from "./rootLayout";
+import RootLayout from "../rootLayout";
 
 // Child components.
-import PageLoadFinisher from "@/components/layout/pageLoadFinisherComponent";
-import NavigationBar from "@/components/frontPages/navigationBar";
-import Footer from "@/components/frontPages/footer";
+import NavigationBar from "@/components/layout/frontPages/navigationBar";
+import Footer from "@/components/layout/frontPages/footer";
 
 // Props.
-type FrontPageLayoutProps = Readonly<{
+export type FrontPageLayoutProps = Readonly<{
+    title: string;
+    description: string;
     children: ReactNode | ReactNode[];
 }>;
 
 // Component.
 export default function FrontPageLayout(props: FrontPageLayoutProps) {
+    // Dependencies.
+    const pathName = usePathname();
+
     return (
-        <RootLayout>
-            <PageLoadFinisher />
+        <RootLayout key={pathName}>
+            <Head>
+                <title>{props.title}</title>
+                <meta name="description" content={props.title}></meta>
+            </Head>
+
             <NavigationBar />
-            <main className="flex-fill h-100">
+            <main className="flex-fill h-100 fadeIn">
                 {props.children}
             </main>
             <Footer />

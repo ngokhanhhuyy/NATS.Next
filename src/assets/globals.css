@@ -108,3 +108,19 @@ select:is(.is-valid)::placeholder {
     color: red;
     margin-left: 5px;
 }
+
+.fadeIn {
+    animation-name: fadeIn;
+    animation-duration: .5s;
+    animation-iteration-count: 1;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
