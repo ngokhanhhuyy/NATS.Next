@@ -1,10 +1,10 @@
 import type { ReactNode } from "react";
 
 // Layout components.
-import RootLayout from "./layout";
+import RootLayout from "./rootLayout";
 
 // Child components.
-import PageLoadFinisher from "@/components/pageLoadFinisherComponent";
+import PageLoadFinisher from "@/components/layout/pageLoadFinisherComponent";
 import NavigationBar from "@/components/frontPages/navigationBar";
 import Footer from "@/components/frontPages/footer";
 

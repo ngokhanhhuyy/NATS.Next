@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { getSliderItemListAsync } from "@/services/sliderItemService";
 import { getSummaryItemListAsync } from "@/services/summaryItemService";
 import { getAboutUsIntroductionAsync } from "@/services/aboutUsIntroductionService";
@@ -14,12 +15,13 @@ import { createGeneralSettingsDetailModel } from "@/models/generalSettingsModels
 import styles from "./index.module.css";
 
 // Layout component.
-import FrontPageLayout from "./frontPageLayout";
+import PageLoadFinisher from "@/components/layout/pageLoadFinisherComponent";
+import FrontPageLayout from "../../components/layout/frontPages/frontPageLayout";
 
 // Child components.
-import SliderItemList from "@/components/frontPages/home/sliderItemListComponent";
-import CatalogItemList from "@/components/frontPages/home/catalogItemListComponent";
-import EnquiryForm from "@/components/frontPages/enquiryFormComponent";
+import SliderItemList from "@/pages/home/sliderItemListComponent";
+import CatalogItemList from "@/pages/home/catalogItemListComponent";
+import EnquiryForm from "@/components/layout/frontPages/enquiryFormComponent";
 
 // Props.
 type HomeProps = {
@@ -77,6 +79,7 @@ export async function getServerSideProps() {
 export default function Home(props: HomeProps) {
     return (
         <FrontPageLayout>
+            <PageLoadFinisher />
             <div className="container-fluid p-0">
                 <SliderItemList model={props.model.sliderItems} />
 
@@ -96,10 +99,12 @@ export default function Home(props: HomeProps) {
                                             d-flex flex-column align-items-center"
                                 key={index}
                             >
-                                <img
+                                <Image
                                     className={`rounded-circle mb-3 shadow
                                                 ${styles.summaryItemThumbnail}`}
                                     src={item.thumbnailUrl}
+                                    width={150}
+                                    height={150}
                                     alt={item.name}
                                 />
 
@@ -119,9 +124,12 @@ export default function Home(props: HomeProps) {
                         <div className="row justify-content-center align-items-stretch">
                             <div className="col col-xl-6 col-lg-8 col-12 overflow-hidden
                                             d-flex align-items-center p-4">
-                                <img
+                                <Image
                                     src={props.model.aboutUsIntroduction.thumbnailUrl}
-                                    className="w-100 rounded-3"
+                                    className="w-100 h-auto rounded-3"
+                                    width={1}
+                                    height={1}
+                                    sizes="100vw"
                                     alt="Về chúng tôi"
                                 />
                             </div>

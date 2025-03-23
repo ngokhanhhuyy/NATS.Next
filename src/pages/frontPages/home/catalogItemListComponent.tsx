@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import styles from "./catalogItemListComponent.module.css";
 
 // Props.
@@ -24,6 +25,7 @@ export default function CatalogItemList(props: Props) {
                         <img
                             src={item.thumbnailUrl}
                             className={`card-img-top ${styles.catalogItemThumbnail}`}
+                            style={{ aspectRatio: 1 }}
                             alt={item.name}
                         />
 

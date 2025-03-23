@@ -1,7 +1,6 @@
-"use client";
 import { useRef, useEffect } from "react";
 import styles from "./sliderItemListComponent.module.css";
-import { Carousel } from "bootstrap";
+import type { Carousel } from "bootstrap";
 
 // Props.
 interface Props {
@@ -10,24 +9,24 @@ interface Props {
 
 // Component.
 export default function SliderItemList(props: Props) {
+
     // States.
     const templateRef = useRef<HTMLDivElement | null>(null);
     const carouselControllerRef = useRef<Carousel | null>(null);
 
-    // // Effect.
-    // useEffect(() => {
-    //     console.log(templateRef.current);
-    //     import("bootstrap").then(({ Carousel }) => {
-    //         carouselControllerRef.current = new Carousel(templateRef.current!, {
-    //             interval: 2000
-    //         });
-    //         carouselControllerRef.current.cycle();
-    //     });
+    // Effect.
+    useEffect(() => {
+        import("bootstrap").then(({ Carousel }) => {
+            carouselControllerRef.current = new Carousel(templateRef.current!, {
+                interval: 2000
+            });
+            carouselControllerRef.current.cycle();
+        });
 
-    //     return () => {
-    //         carouselControllerRef.current?.dispose();
-    //     };
-    // }, []);
+        return () => {
+            carouselControllerRef.current?.dispose();
+        };
+    }, []);
 
     // Computed.
     function computeItemClassName(index: number): string {
