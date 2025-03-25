@@ -11,20 +11,20 @@ import BootstrapClient from "@/components/layout/bootstrapClient";
 
 // Props.
 type RootLayoutProps = Readonly<{
-    children: ReactNode | ReactNode[];
+	children: ReactNode | ReactNode[];
 }>
 
-export default function RootLayout(props: RootLayoutProps) {
-    return (
-        <>
-            <PageLoadProgressBarProvider>
-                <PageLoadProgressBar/>
-                <PageLoadFinisher/>
-                <div className="container-fluid p-0 d-flex flex-column position-relative">
-                    {props.children}
-                </div>
-            </PageLoadProgressBarProvider>
-            <BootstrapClient/>
-        </>
-    );
+export default function Layout(props: RootLayoutProps) {
+	return (
+		<>
+			<PageLoadProgressBarProvider>
+				<PageLoadProgressBar/>
+				<PageLoadFinisher/>
+				<div className="container-fluid p-0 d-flex flex-column position-relative">
+					{props.children}
+				</div>
+			</PageLoadProgressBarProvider>
+			<BootstrapClient/>
+		</>
+	);
 }
