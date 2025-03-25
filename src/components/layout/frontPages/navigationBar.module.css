@@ -39,6 +39,8 @@
     --bs-nav-link-color: var(--navbar-foreground-color) !important;
     --bs-nav-link-hover-color: var(--navbar-foreground-color) !important;
     --bs-navbar-active-color: var(--navbar-foreground-color) !important;
+    justify-content: end;
+    width: 100%;
 }
 
 .nav :global(.navbar-nav) {
