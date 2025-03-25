@@ -108,3 +108,26 @@ select:is(.is-valid)::placeholder {
     color: red;
     margin-left: 5px;
 }
+
+.opacity-transition {
+    transition: opacity .5s ease;
+}
+
+.fade-animation {
+    animation-name: fade;
+    animation-duration: .5s;
+}
+
+.fade-animation-backward {
+    animation-direction: backward;
+}
+
+@keyframes fade {
+    from {
+        opacity: 100%;
+    }
+
+    to {
+        opacity: 50%;
+    }
+}
