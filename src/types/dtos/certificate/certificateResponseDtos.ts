@@ -1,9 +1,9 @@
 declare global {
-    type CertificateResponseDto = {
-        id: number;
-        name: string;
-        thumbnailUrl: string;
-    };
+	type CertificateResponseDto = {
+		id: number;
+		name: string;
+		thumbnailUrl: string;
+	};
 }
 
-export { };
+export {};

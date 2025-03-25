@@ -1,9 +1,8 @@
-import type { ReactNode } from "react";
-import { usePathname } from "next/navigation";
+import { type ReactNode } from "react";
 import Head from "next/head";
 
-// Layout components.
-import RootLayout from "../rootLayout";
+// Layout component.
+import PageLoadFinisher from "@/components/layout/pageLoadFinisherComponent";
 
 // Child components.
 import NavigationBar from "@/components/layout/frontPages/navigationBar";
@@ -11,28 +10,19 @@ import Footer from "@/components/layout/frontPages/footer";
 
 // Props.
 export type FrontPageLayoutProps = Readonly<{
-    title: string;
-    description: string;
-    children: ReactNode | ReactNode[];
+  children: ReactNode | ReactNode[];
 }>;
 
 // Component.
 export default function FrontPageLayout(props: FrontPageLayoutProps) {
-    // Dependencies.
-    const pathName = usePathname();
-
-    return (
-        <RootLayout key={pathName}>
-            <Head>
-                <title>{props.title}</title>
-                <meta name="description" content={props.title}></meta>
-            </Head>
-
-            <NavigationBar />
-            <main className="flex-fill h-100 fadeIn">
-                {props.children}
-            </main>
-            <Footer />
-        </RootLayout>
-    );
+  return (
+    <>
+			<PageLoadFinisher/>
+      <NavigationBar />
+      <main className={`flex-fill h-100 fade-animation fade-animation-reverse`}>
+				{props.children}
+			</main>
+      <Footer />
+    </>
+  );
 }

@@ -10,53 +10,53 @@ export const PageLoadProgressBarContext = createContext<PageLoadProgressBarApi |
 
 // Props.
 interface PageLoadProgressBarProviderProps {
-    children: ReactNode | ReactNode[];
+	children: ReactNode | ReactNode[];
 }
 
 // Component.
 export function PageLoadProgressBarProvider(props: PageLoadProgressBarProviderProps) {
-    // Dependencies.
-    const router = useRouter();
-    const storeRef = useRef<PageLoadProgressBarApi | null>(null);
-    if (!storeRef.current) {
-        storeRef.current = createPageLoadProgressBarStore();
-    }
+	// Dependencies.
+	const router = useRouter();
+	const storeRef = useRef<PageLoadProgressBarApi | null>(null);
+	if (!storeRef.current) {
+		storeRef.current = createPageLoadProgressBarStore();
+	}
 
-    // Effect.
-    useEffect(() => {
-        router.events.on("routeChangeStart", handleRouteChangeStart);
-        router.events.on("routeChangeError", handleRouteChangeError);
+	// Effect.
+	useEffect(() => {
+		router.events.on("routeChangeStart", handleRouteChangeStart);
+		router.events.on("routeChangeError", handleRouteChangeError);
 
-        return () => {
-            router.events.off("routeChangeStart", handleRouteChangeStart);
-            router.events.off("routeChangeError", handleRouteChangeError);
-        };
-    }, [router]);
+		return () => {
+			router.events.off("routeChangeStart", handleRouteChangeStart);
+			router.events.off("routeChangeError", handleRouteChangeError);
+		};
+	}, [router]);
 
-    // Callbacks.
-    function handleRouteChangeStart(): void {
-        storeRef.current?.getState().start();
-    }
+	// Callbacks.
+	function handleRouteChangeStart(): void {
+		storeRef.current?.getState().start();
+	}
 
-    function handleRouteChangeError(): void {
-        storeRef.current?.getState().finish();
-    }
+	function handleRouteChangeError(): void {
+		storeRef.current?.getState().finish();
+	}
 
-    return (
-        <PageLoadProgressBarContext.Provider value={storeRef.current}>
-            {props.children}
-        </PageLoadProgressBarContext.Provider>
-    );
+	return (
+			<PageLoadProgressBarContext.Provider value={storeRef.current}>
+				{props.children}
+			</PageLoadProgressBarContext.Provider>
+	);
 }
 
 // Hooks.
-export function usePageLoadProgressBarStore<T,>
-        (selector: (store: PageLoadProgressBarStore) => T): T {
-    const pageLoadProgressBarStoreContext = useContext(PageLoadProgressBarContext);
-    if (!pageLoadProgressBarStoreContext) {
-        throw new Error("usePageLoadProgressBarStore must be used within \
+export function usePageLoadProgressBarStore<T, >
+(selector: (store: PageLoadProgressBarStore) => T): T {
+	const pageLoadProgressBarStoreContext = useContext(PageLoadProgressBarContext);
+	if (!pageLoadProgressBarStoreContext) {
+		throw new Error("usePageLoadProgressBarStore must be used within \
                         PageLoadProgressBarStoreProvider");
-    }
+	}
 
-    return useStore(pageLoadProgressBarStoreContext, selector);
+	return useStore(pageLoadProgressBarStoreContext, selector);
 }

@@ -1,8 +1,8 @@
 declare global {
-    type SignInRequestDto = {
-        userName: string;
-        password: string;
-    }
+	type SignInRequestDto = {
+		userName: string;
+		password: string;
+	}
 }
 
-export { };
+export {};

@@ -19,7 +19,7 @@
     opacity: 0;
 }
 
-.waiting { 
+.waiting {
     transition: width 2s ease !important;
     opacity: 1;
 }

@@ -8,7 +8,7 @@ import * as api from "./api";
  * @example getListAsync();
  */
 async function getListAsync(): Promise<SummaryItemResponseDto[]> {
-    return await api.getAsync("/summaryItem");
+	return await api.getAsync("/summaryItem");
 }
 
 /**
@@ -22,7 +22,7 @@ async function getListAsync(): Promise<SummaryItemResponseDto[]> {
  * @throws {NotFoundError} Throws when the summary item specified by {@link id} doesn't exist.
  */
 async function getSingleAsync(id: number): Promise<SummaryItemResponseDto> {
-    return await api.getAsync(`/summaryItem/${id}`);
+	return await api.getAsync(`/summaryItem/${id}`);
 }
 
 /**
@@ -39,13 +39,13 @@ async function getSingleAsync(id: number): Promise<SummaryItemResponseDto> {
  * during the operation.
  */
 async function updateAsync(
-        id: number,
-        requestDto: SummaryItemUpdateRequestDto): Promise<void> {
-    await api.putAndIgnoreAsync(`/summaryItem/${id}`, requestDto);
+		id: number,
+		requestDto: SummaryItemUpdateRequestDto): Promise<void> {
+	await api.putAndIgnoreAsync(`/summaryItem/${id}`, requestDto);
 }
 
 export {
-    getListAsync as getSummaryItemListAsync,
-    getSingleAsync as getSummaryItemSingleAsync,
-    updateAsync as updateSummaryItemAsync
+	getListAsync as getSummaryItemListAsync,
+	getSingleAsync as getSummaryItemSingleAsync,
+	updateAsync as updateSummaryItemAsync
 };

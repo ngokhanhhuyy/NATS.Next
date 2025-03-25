@@ -1,6 +1,6 @@
 export enum ContactType {
-    PhoneNumber,
-    ZaloNumber,
-    Email,
-    Address
+	PhoneNumber,
+	ZaloNumber,
+	Email,
+	Address
 }

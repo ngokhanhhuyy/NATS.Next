@@ -1,8 +1,7 @@
 .titleContainer {
-    background-image:
-        linear-gradient(
+    background-image: linear-gradient(
             to right,
             rgba(var(--bs-success-rgb), 0.85) 0%,
             rgba(var(--bs-success-rgb), 0.85) 100%),
-        url("/images/front-pages/sub-page-title-container-background.webp");
+    url("/images/front-pages/sub-page-title-container-background.webp");
 }

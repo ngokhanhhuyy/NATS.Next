@@ -8,7 +8,7 @@ import * as api from "./api";
  * @example getListAsync();
  */
 async function getListAsync(): Promise<SliderItemResponseDto[]> {
-    return await api.getAsync("/sliderItem");
+	return await api.getAsync("/sliderItem");
 }
 
 /**
@@ -22,7 +22,7 @@ async function getListAsync(): Promise<SliderItemResponseDto[]> {
  * @throws {NotFoundError} Throws when the slider item specified by {@link id} doesn't exist.
  */
 async function getSingleAsync(id: number): Promise<SliderItemResponseDto> {
-    return await api.getAsync(`/sliderItem/${id}`);
+	return await api.getAsync(`/sliderItem/${id}`);
 }
 
 /**
@@ -36,7 +36,7 @@ async function getSingleAsync(id: number): Promise<SliderItemResponseDto> {
  * @throws {ValidationError} Throws when the data specified by {@link requestDto} is invalid.
  */
 async function createAsync(requestDto: SliderItemUpsertRequestDto): Promise<number> {
-    return await api.postAsync("/sliderItem", requestDto);
+	return await api.postAsync("/sliderItem", requestDto);
 }
 
 /**
@@ -53,7 +53,7 @@ async function createAsync(requestDto: SliderItemUpsertRequestDto): Promise<numb
  * during the operation.
  */
 async function updateAsync(id: number, requestDto: SliderItemUpsertRequestDto): Promise<void> {
-    await api.putAndIgnoreAsync(`/sliderItem/${id}`, requestDto);
+	await api.putAndIgnoreAsync(`/sliderItem/${id}`, requestDto);
 }
 
 /**
@@ -68,13 +68,13 @@ async function updateAsync(id: number, requestDto: SliderItemUpsertRequestDto): 
  * during the operation.
  */
 async function deleteAsync(id: number): Promise<void> {
-    await api.deleteAndIgnoreAsync(`/sliderItem/${id}`);
+	await api.deleteAndIgnoreAsync(`/sliderItem/${id}`);
 }
 
 export {
-    getListAsync as getSliderItemListAsync,
-    getSingleAsync as getSliderItemSingleAsync,
-    createAsync as createSliderItemAsync,
-    updateAsync as updateSliderItemAsync,
-    deleteAsync as deleteSliderItemAsync
+	getListAsync as getSliderItemListAsync,
+	getSingleAsync as getSliderItemSingleAsync,
+	createAsync as createSliderItemAsync,
+	updateAsync as updateSliderItemAsync,
+	deleteAsync as deleteSliderItemAsync
 };

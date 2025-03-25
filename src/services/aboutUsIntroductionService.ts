@@ -8,7 +8,7 @@ import * as api from "./api";
  * @example getAsync();
  */
 async function getAsync(): Promise<AboutUsIntroductionResponseDto> {
-    return api.getAsync("/aboutUsIntroduction");
+	return api.getAsync("/aboutUsIntroduction");
 }
 
 /**
@@ -22,10 +22,10 @@ async function getAsync(): Promise<AboutUsIntroductionResponseDto> {
  * during the operation.
  */
 async function updateAsync(requestDto: AboutUsIntroductionUpdateRequestDto): Promise<void> {
-    await api.postAsync("/aboutUsIntroduction", requestDto);
+	await api.postAsync("/aboutUsIntroduction", requestDto);
 }
 
 export {
-    getAsync as getAboutUsIntroductionAsync,
-    updateAsync as updateAboutUsIntroductionAsync
+	getAsync as getAboutUsIntroductionAsync,
+	updateAsync as updateAboutUsIntroductionAsync
 };

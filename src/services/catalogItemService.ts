@@ -15,7 +15,7 @@ type BasicResponseDto = CatalogItemBasicResponseDto;
  * exist.
  */
 async function getListAsync(requestDto?: ListRequestDto): Promise<BasicResponseDto[]> {
-    return await api.getAsync("/catalogItem", requestDto);
+	return await api.getAsync("/catalogItem", requestDto);
 }
 
 /**
@@ -30,7 +30,7 @@ async function getListAsync(requestDto?: ListRequestDto): Promise<BasicResponseD
  * {@link id} doesn't exist.
  */
 async function getDetailAsync(id: number): Promise<CatalogItemDetailResponseDto> {
-    return await api.getAsync(`/catalogItem/${id}`);
+	return await api.getAsync(`/catalogItem/${id}`);
 }
 
 /**
@@ -46,7 +46,7 @@ async function getDetailAsync(id: number): Promise<CatalogItemDetailResponseDto>
  * operation.
  */
 async function createAsync(requestDto: CatalogItemUpsertRequestDto): Promise<number> {
-    return await api.postAsync("/catalogItem", requestDto);
+	return await api.postAsync("/catalogItem", requestDto);
 }
 
 /**
@@ -62,19 +62,19 @@ async function createAsync(requestDto: CatalogItemUpsertRequestDto): Promise<num
  * @throws {NotFoundError} Throws when the catalog item specified by doesn't exist.
  */
 async function updateAsync(
-        id: number,
-        requestDto: CatalogItemUpsertRequestDto): Promise<void> {
-    await api.putAndIgnoreAsync(`/catalogItem/${id}`, requestDto);
+		id: number,
+		requestDto: CatalogItemUpsertRequestDto): Promise<void> {
+	await api.putAndIgnoreAsync(`/catalogItem/${id}`, requestDto);
 }
 
 async function deleteAsync(id: number): Promise<void> {
-    await api.deleteAndIgnoreAsync(`/catalogItem/${id}`);
+	await api.deleteAndIgnoreAsync(`/catalogItem/${id}`);
 }
 
 export {
-    getListAsync as getCatalogItemListAsync,
-    getDetailAsync as getCatalogItemDetailAsync,
-    createAsync as createCatalogItemAsync,
-    updateAsync as updateCatalogItemAsync,
-    deleteAsync as deleteCatalogItemAsync
+	getListAsync as getCatalogItemListAsync,
+	getDetailAsync as getCatalogItemDetailAsync,
+	createAsync as createCatalogItemAsync,
+	updateAsync as updateCatalogItemAsync,
+	deleteAsync as deleteCatalogItemAsync
 };

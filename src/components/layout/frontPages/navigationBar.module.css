@@ -1,13 +1,5 @@
 .nav {
-    --navbar-logo-img-filter:
-        brightness(0)
-        saturate(100%)
-        invert(39%)
-        sepia(90%)
-        saturate(393%)
-        hue-rotate(100deg)
-        brightness(88%)
-        contrast(89%);
+    --navbar-logo-img-filter: brightness(0) saturate(100%) invert(39%) sepia(90%) saturate(393%) hue-rotate(100deg) brightness(88%) contrast(89%);
     --navbar-transition-duration: 0.3s;
     --navbar-background-color: var(--bs-white);
     --navbar-foreground-color: var(--bs-success);
