@@ -8,7 +8,7 @@ import { createCertificateDetailModel } from "@/models/certificateModels";
 import styles from "./index.module.css";
 
 // Layout components.
-import FrontPageSubPageLayout from "../frontPageSubPageLayout";
+import FrontPageSubPageLayout from "@/components/layout/frontPages/frontPageSubPageLayout";
 
 // Type.
 type Model = {

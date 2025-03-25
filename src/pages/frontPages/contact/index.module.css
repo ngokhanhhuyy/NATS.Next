@@ -1,0 +1,24 @@
+.applicationName {
+    color: var(--bs-success);
+    font-weight: bold;
+    text-decoration: none;
+    transition: .2s ease;
+}
+
+.applicationName:hover {
+    filter: brightness(150%);
+}
+
+.googleMapFrame {
+    min-height: 350px;
+}
+
+.contactItem :global(a) {
+    color: var(--bs-success);
+    text-decoration: none;
+    transition: .2s ease;
+}
+
+.contactItem :global(a:hover) {
+    filter: brightness(150%);
+}

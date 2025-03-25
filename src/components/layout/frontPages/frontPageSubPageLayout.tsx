@@ -1,8 +1,8 @@
-import { ReactNode } from "react";
 import styles from "./frontPageSubPageLayout.module.css";
 
 // Layout components.
-import FrontPageLayout from "./frontPageLayout";
+import FrontPageLayout, { type FrontPageLayoutProps } from "./frontPageLayout";
+import EnquiryForm from "@/components/layout/frontPages/enquiryFormComponent";
 
 // Props.
 type FrontPageSubPageLayoutProps = {

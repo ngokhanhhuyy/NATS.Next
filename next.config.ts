@@ -13,8 +13,32 @@ const nextConfig: NextConfig = {
                 destination: "http://localhost:5000/images/:path*",
             },
             {
-                source: "/ve-chung-toi/:path*",
-                destination: "/aboutUs/:path*"
+                source: "/",
+                destination: "/frontPages/home"
+            },
+            {
+                source: "/gioi-thieu",
+                destination: "/frontPages/summaryItem"
+            },
+            {
+                source: "/ve-chung-toi",
+                destination: "/frontPages/aboutUsIntroduction"
+            },
+            {
+                source: "/dich-vu/:path*",
+                destination: "/frontPages/catalogItem/services/:path*"
+            },
+            {
+                source: "/khoa-hoc/:path*",
+                destination: "/frontPages/catalogItem/courses/:path*"
+            },
+            {
+                source: "/san-pham/:path*",
+                destination: "/frontPages/catalogItem/products/:path*"
+            },
+            {
+                source: "/lien-he",
+                destination: "/frontPages/contact"
             }
         ];
     },

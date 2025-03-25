@@ -20,10 +20,11 @@ declare global {
         type: CatalogItemType;
         summary: string;
         detail: string;
-        thumbnailUrl: string;
+        thumbnailUrl: string | null;
         photos: CatalogItemDetailPhotoModel[];
-        otherCatalogItems: CatalogItemBasicModel[];
+        otherItems: CatalogItemBasicModel[];
         detailRoute: string;
+        typeDisplayName: string;
     };
 
     type CatalogItemDetailPhotoModel = {
@@ -38,6 +39,12 @@ type DetailPhotoResponseDto = CatalogItemDetailPhotoResponseDto;
 type BasicModel = CatalogItemBasicModel;
 type DetailModel = CatalogItemDetailModel;
 type DetailPhotoModel = CatalogItemDetailPhotoModel;
+
+const typeDisplayNames: Record<CatalogItemType, string> = {
+    [CatalogItemType.Service]: "Dịch vụ",
+    [CatalogItemType.Course]: "Khoá học",
+    [CatalogItemType.Product]: "Sản phẩm"
+};
 
 function createBasic(responseDto: BasicResponseDto): BasicModel {
     let thumbnailUrl = "https://placehold.co/512x512";
@@ -64,18 +71,23 @@ function createBasic(responseDto: BasicResponseDto): BasicModel {
     };
 }
 
-function createDetail(
-        detailResponseDto: DetailResponseDto,
-        otherCatalogItemResponseDtos: BasicResponseDto[]): DetailModel {
+function createDetail(responseDto: DetailResponseDto): DetailModel {
+    let thumbnailUrl: string | null = responseDto.thumbnailUrl;
+    let photosAsPlaceholders = false;
+    if (responseDto.type === CatalogItemType.Course && responseDto.thumbnailUrl) {
+        thumbnailUrl = "https://placehold.co/512x512";
+        photosAsPlaceholders = true;
+    }
+
     return {
-        id: detailResponseDto.id,
-        name: detailResponseDto.name,
-        type: detailResponseDto.type,
-        summary: detailResponseDto.summary,
-        detail: detailResponseDto.detail,
-        thumbnailUrl: detailResponseDto.thumbnailUrl ?? "https://placehold.co/512x512",
-        photos: detailResponseDto.photos.map(dto => createDetailPhoto(dto)),
-        otherCatalogItems: otherCatalogItemResponseDtos.map(dto => createBasic(dto)),
+        id: responseDto.id,
+        name: responseDto.name,
+        type: responseDto.type,
+        summary: responseDto.summary,
+        detail: responseDto.detail,
+        thumbnailUrl: thumbnailUrl,
+        photos: responseDto.photos.map(dto => createDetailPhoto(dto, photosAsPlaceholders)),
+        otherItems: responseDto.otherItems.map(dto => createBasic(dto)),
         get detailRoute(): string {
             switch (this.type) {
                 case CatalogItemType.Service:
@@ -85,14 +97,24 @@ function createDetail(
                 case CatalogItemType.Product:
                     return getProductDetailRoutePath(this.id);
             }
+        },
+        get typeDisplayName(): string {
+            return typeDisplayNames[this.type];
         }
     };
 }
 
-function createDetailPhoto(responseDto: DetailPhotoResponseDto): DetailPhotoModel {
+function createDetailPhoto(
+        responseDto: DetailPhotoResponseDto,
+        asPlaceholder: boolean = false): DetailPhotoModel {
+    let url: string = responseDto.url;
+    if (asPlaceholder) {
+        url = "https://placehold.co/512x512";
+    }
+
     return {
         id: responseDto.id,
-        url: responseDto.url
+        url: url
     };
 }
 

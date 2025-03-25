@@ -87,8 +87,7 @@ export async function executeAsync(
         endpointPath: string,
         requestDto?: object,
         params?: Params,
-        delay: number = 300,
-        abortSignal: AbortSignal | null = null): Promise<Response> {
+        delay: number = 300): Promise<Response> {
     // Determining the API's endpoint url.
     const isServer = typeof window === "undefined";
     let endpointUrl;
@@ -105,8 +104,7 @@ export async function executeAsync(
     let requestInit: RequestInit = {
         headers: { "Content-Type": "application/json" },
         credentials: "include" as RequestCredentials,
-        method: method,
-        signal: abortSignal
+        method: method
     };
 
     if (requestDto) {
@@ -144,8 +142,6 @@ export async function executeAsync(
  * @param delay (Optional, default: 300) A value specifying the minimum time that the
  * operation should wait before returning the response. This is for user experience
  * enhancement.
- * @param abortSignal (Optional) A signal from {@link AbortController} for request
- * cancellation.
  * @returns A `Promise` which resolves to an object as an implementation of type
  * `TResponseDto`.
  * @example getAsync<ResponseDtos.User.Detail>("user/1");
@@ -153,15 +149,8 @@ export async function executeAsync(
 export async function getAsync<TResponseDto>(
         endpointPath: string,
         params?: Params,
-        delay?: number,
-        abortSignal?: AbortSignal): Promise<TResponseDto> {
-    const response = await executeAsync(
-        "get",
-        endpointPath,
-        undefined,
-        params,
-        delay,
-        abortSignal);
+        delay?: number): Promise<TResponseDto> {
+    const response = await executeAsync("get", endpointPath, undefined, params, delay);
     const responseAsText = await response.text();
     return jsonUtils.parseJson<TResponseDto>(responseAsText)!;
 }
@@ -180,23 +169,14 @@ export async function getAsync<TResponseDto>(
  * @param delay (Optional, default: 300) A value specifying the minimum time that the
  * operation should wait before returning the response. This is for user experience
  * enhancement.
- * @param abortSignal (Optional) A signal from {@link AbortController} for request
- * cancellation.
  * @example postAsync<int>("user");
  */
 export async function postAsync<TResponseDto>(
         endpointPath: string,
         requestDto: object,
         params?: Params,
-        delay?: number,
-        abortSignal?: AbortSignal): Promise<TResponseDto> {
-    const response = await executeAsync(
-        "post",
-        endpointPath,
-        requestDto,
-        params,
-        delay,
-        abortSignal);
+        delay?: number): Promise<TResponseDto> {
+    const response = await executeAsync("post", endpointPath, requestDto, params, delay);
     const responseAsText = await response.text();
     return jsonUtils.parseJson<TResponseDto>(responseAsText)!;
 }
@@ -213,8 +193,6 @@ export async function postAsync<TResponseDto>(
  * @param delay (Optional, default: 300) A value specifying the minimum time that the
  * operation should wait before returning the response. This is for user experience
  * enhancement.
- * @param abortSignal (Optional) A signal from {@link AbortController} for request
- * cancellation.
  * @returns A `Promise` which resolves to an object as an implementation of type
  * `TResponseDto`.
  * @example postAndIgnoreAsync("user/changePasswordAsync/1");
@@ -223,9 +201,8 @@ export async function postAndIgnoreAsync(
         endpointPath: string,
         requestDto: object,
         params?: Params,
-        delay?: number,
-        abortSignal?: AbortSignal): Promise<void> {
-    await executeAsync("post", endpointPath, requestDto, params, delay, abortSignal);
+        delay?: number): Promise<void> {
+    await executeAsync("post", endpointPath, requestDto, params, delay);
 }
 
 /**
@@ -242,8 +219,6 @@ export async function postAndIgnoreAsync(
  * @param delay (Optional, default: 300) A value specifying the minimum time that the
  * operation should wait before returning the response. This is for user experience
  * enhancement.
- * @param abortSignal (Optional) A signal from {@link AbortController} for request
- * cancellation.
  * @returns A `Promise` which resolves to an object as an implementation of type
  * `TResponseDto`.
  * @example putAsync<boolean>("user/1", requestDto);
@@ -252,15 +227,8 @@ export async function putAsync<TResponseDto>(
         endpointPath: string,
         requestDto: object,
         params?: Params,
-        delay?: number,
-        abortSignal?: AbortSignal): Promise<TResponseDto> {
-    const response = await executeAsync(
-        "put",
-        endpointPath,
-        requestDto,
-        params,
-        delay,
-        abortSignal);
+        delay?: number): Promise<TResponseDto> {
+    const response = await executeAsync("put", endpointPath, requestDto, params, delay);
     const responseAsText = await response.text();
     return jsonUtils.parseJson<TResponseDto>(responseAsText)!;
 }
@@ -277,8 +245,6 @@ export async function putAsync<TResponseDto>(
  * @param delay (Optional, default: 300) A value specifying the minimum time that the
  * operation should wait before returning the response. This is for user experience
  * enhancement.
- * @param abortSignal (Optional) A signal from {@link AbortController} for request
- * cancellation.
  * @returns A `Promise` which resolves to an object as an implementation of type
  * `TResponseDto`.
  * @example putAndIgnoreAsync("user/1", requestDto);
@@ -287,9 +253,8 @@ export async function putAndIgnoreAsync(
         endpointPath: string,
         requestDto: object,
         params?: Record<string, any>,
-        delay?: number,
-        abortSignal?: AbortSignal): Promise<void> {
-    await executeAsync("put", endpointPath, requestDto, params, delay, abortSignal);
+        delay?: number): Promise<void> {
+    await executeAsync("put", endpointPath, requestDto, params, delay);
 }
 
 /**
@@ -302,11 +267,9 @@ export async function putAndIgnoreAsync(
  * @param endpointPath The path of the api's endpoint to send the request.
  * @param params (Optional) An object containing the data which will be converted
  * into a query string and added into the request's url.
- * @param params (Optional, default: 300) A value specifying the minimum time that the
+ * @param delay (Optional, default: 300) A value specifying the minimum time that the
  * operation should wait before returning the response. This is for user experience
  * enhancement.
- * @param abortSignal (Optional) A signal from {@link AbortController} for request
- * cancellation.
  * @returns A `Promise` which resolves to an object as an implementation of type
  * `TResponseDto`.
  * @example deleteAsync<boolean>("user/1");
@@ -314,15 +277,8 @@ export async function putAndIgnoreAsync(
 export async function deleteAsync<TResponseDto>(
         endpointPath: string,
         params?: Params,
-        delay?: number,
-        abortSignal?: AbortSignal): Promise<TResponseDto> {
-    const response = await executeAsync(
-        "delete",
-        endpointPath,
-        undefined,
-        params,
-        delay,
-        abortSignal);
+        delay?: number): Promise<TResponseDto> {
+    const response = await executeAsync("delete", endpointPath, undefined, params, delay);
     const responseAsText = await response.text();
     return jsonUtils.parseJson<TResponseDto>(responseAsText)!;
 }
@@ -337,8 +293,6 @@ export async function deleteAsync<TResponseDto>(
  * @param delay (Optional, default: 300) A value specifying the minimum time that the
  * operation should wait before returning the response. This is for user experience
  * enhancement.
- * @param abortSignal (Optional) A signal from {@link AbortController} for request
- * cancellation.
  * @returns A `Promise` which resolves to an object as an implementation of type
  * `TResponseDto`.
  * @example deleteAndIgnoreAysnc("user/1");
@@ -346,9 +300,8 @@ export async function deleteAsync<TResponseDto>(
 export async function deleteAndIgnoreAsync(
         endpointPath: string,
         params?: Params,
-        delay?: number,
-        abortSignal?: AbortSignal): Promise<void> {
-    await executeAsync("delete", endpointPath, undefined, params, delay, abortSignal);
+        delay?: number): Promise<void> {
+    await executeAsync("delete", endpointPath, undefined, params, delay);
 }
 
 /**

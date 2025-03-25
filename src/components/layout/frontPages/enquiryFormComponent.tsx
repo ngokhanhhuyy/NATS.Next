@@ -1,4 +1,3 @@
-"use client";
 import { useState, useEffect } from "react";
 import { createEnquiryCreateModel } from "@/models/enquiryModels";
 import styles from "./enquiryFormComponent.module.css";

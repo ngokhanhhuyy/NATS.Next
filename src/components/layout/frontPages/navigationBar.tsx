@@ -1,3 +1,7 @@
+<<<<<<< HEAD:src/components/frontPages/navigationBar.tsx
+=======
+import type { ReactNode } from "react";
+>>>>>>> a75df80811d83d142c28532c745e93962b3468d7:src/components/layout/frontPages/navigationBar.tsx
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -89,6 +93,7 @@ export default function NavigationBar() {
                 Sản phẩm
               </NavigationItem>
 
+<<<<<<< HEAD:src/components/frontPages/navigationBar.tsx
               {/* Contacts */}
               <NavigationItem path={routeUtils.getContactsRoutePath()}>
                 Liên hệ
@@ -112,6 +117,56 @@ function NavigationItem(props: { path: string, children: React.ReactNode }) {
       (props.path !== "/" && pathName.startsWith(props.path))) {
       classNames.push("active");
     }
+=======
+                            {/* SummaryItem */}
+                            <NavigationItem path={routeUtils.getSummaryItemsRoutePath()}>
+                                Giới thiệu
+                            </NavigationItem>
+                            
+                            {/* AboutUsIntroduction */}
+                            <NavigationItem path={routeUtils.getAboutUsIntroductionRoutePath()}>
+                                Về chúng tôi
+                            </NavigationItem>
+                            
+                            {/* CatalogItem - Services */}
+                            <NavigationItem path={routeUtils.getServiceListRoutePath()}>
+                                Dịch vụ
+                            </NavigationItem>
+                            
+                            {/* CatalogItem - Course */}
+                            <NavigationItem path={routeUtils.getCourseListRoutePath()}>
+                                Khoá học
+                            </NavigationItem>
+                            
+                            {/* CatalogItem - Product */}
+                            {/* <NavigationItem path={routeUtils.getProductListRoutePath()}>
+                                Sản phẩm
+                            </NavigationItem> */}
+                            
+                            {/* Contacts */}
+                            <NavigationItem path={routeUtils.getContactsRoutePath()}>
+                                Liên hệ
+                            </NavigationItem>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    );
+}
+
+function NavigationItem(props: { path: string, children: ReactNode }) {
+    // Dependencies.
+    const pathName = usePathname();
+
+    // Computed.
+    const computeItemClassName = (): string => {
+        const classNames: string[] = [styles.link];
+        if ((pathName === "/" && props.path === "/") ||
+            (props.path !== "/" && pathName.startsWith(props.path))) {
+            classNames.push("active");
+        }
+>>>>>>> a75df80811d83d142c28532c745e93962b3468d7:src/components/layout/frontPages/navigationBar.tsx
 
     return classNames.join(" ");
   };

@@ -17,6 +17,7 @@ declare global {
         detail: string;
         thumbnailUrl: string | null;
         photos: CatalogItemDetailPhotoResponseDto[];
+        otherItems: CatalogItemBasicResponseDto[];
     }
 
     type CatalogItemDetailPhotoResponseDto = {

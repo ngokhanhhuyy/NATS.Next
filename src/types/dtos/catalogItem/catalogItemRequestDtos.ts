@@ -3,7 +3,6 @@ import { CatalogItemType } from "@/enums/catalogItemType";
 declare global {
     type CatalogItemListRequestDto = Partial<{
         type: CatalogItemType;
-        excludedIds: number[];
     }>;
 
     type CatalogItemUpsertRequestDto = {

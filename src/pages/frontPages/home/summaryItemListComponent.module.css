@@ -1,0 +1,25 @@
+.link {
+    color: unset;
+    text-decoration: none !important;
+    border: 1px solid transparent;
+}
+
+.link:hover {
+    background-color: rgba(var(--bs-success-rgb), 0.1);
+    border-color: rgba(var(--bs-success-rgb), 0.5);
+    box-shadow: var(--bs-box-shadow-sm);
+    border-radius: .5rem;
+}
+
+.thumbnail {
+    width: 150px;
+    height: 150px;
+    aspect-ratio: 1;
+    box-shadow: var(--bs-box-shadow);
+    transition: .2s ease;
+}
+
+.link:hover .thumbnail {
+    box-shadow: none !important;
+    transform: scale(1.05);
+}
