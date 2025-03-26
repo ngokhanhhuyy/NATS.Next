@@ -13,7 +13,7 @@
     "Helvetica Neue",
     sans-serif !important;
     --bs-body-font-size: 1.2rem !important;
-    --navbar-height: 60px;
+    --navbar-height: 68px;
 }
 
 html {
@@ -109,6 +109,12 @@ select:is(.is-valid)::placeholder {
     margin-left: 5px;
 }
 
+.row[class*="g-"] > [class^="col"],
+.row[class*="gy-"] > [class^="col"] {
+    padding-top: calc(var(--bs-gutter-y) / 2);
+    padding-bottom: calc(var(--bs-gutter-y) / 2);
+}
+
 .fade-transition {
     transition: opacity .5s ease;
 }
@@ -122,8 +128,6 @@ select:is(.is-valid)::placeholder {
 .fade-animation-reverse {
     animation-direction: reverse;
 }
-
-@keyframes fade {
 @keyframes fade {
     from {
         opacity: 100%;

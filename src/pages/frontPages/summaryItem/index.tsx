@@ -52,7 +52,7 @@ export default function SummaryItemPage(props: SummaryItemPageProps) {
 				<meta name="description" content="Giới thiệu về lĩnh vực hoạt động." />
 			</Head>
 
-			<div className="container py-4 mt-4">
+			<div className="container p-4 py-5">
 				{props.model.map((item, index) => (
 					<Item model={item} index={index} key={index} />
 				))}
@@ -94,7 +94,7 @@ function Item(props: ItemProps) {
 
 	return (
 		<div
-			className={`row g-5 justify-content-center mb-5 ${styles.itemRow}`}
+			className={`row gx-5 gy-3 mb-3 justify-content-center ${styles.itemRow}`}
 			id={props.model.id.toString()}
 		>
 			{/* Thumbnail */}
@@ -115,9 +115,9 @@ function Item(props: ItemProps) {
 			{/* Detail */}
 			<div className={`col col-lg col-md-10 col-12 ${computeDetailColumnClassName()}`}>
 				{/* Name */}
-				<div className={`fs-2 text-success mb-3 ${computeNameClassName()}`}>
+				<h2 className={`text-success ${computeNameClassName()}`}>
 					{props.model.name}
-				</div>
+				</h2>
 
 				{/* DetailContent */}
 				{props.model.detailContent.split(/\r?\n/).map((paragraph, index) => (

@@ -95,7 +95,7 @@ export default function HomePage(props: HomeProps) {
 			<SummaryItemList model={props.model.summaryItems} />
 
 			{/* AboutUsIntroduction */}
-			<div className="container-fluid bg-success text-white fs-5 my-5 shadow">
+			<div className="container-fluid bg-success text-white fs-5 mb-5 shadow">
 				<div className="container">
 					<div className="row justify-content-center align-items-stretch">
 						<div
@@ -119,7 +119,7 @@ export default function HomePage(props: HomeProps) {
 								"justify-content-center align-items-start",
 							].join(" ")}
 						>
-							<div className="fs-2 mb-3">Về chúng tôi</div>
+							<h2 className="mb-2">Về chúng tôi</h2>
 							<p>{props.model.aboutUsIntroduction.aboutUsContent}</p>
 							<a
 								asp-area="FrontPages"
@@ -135,11 +135,9 @@ export default function HomePage(props: HomeProps) {
 			</div>
 
 			{/* CatalogItems */}
-			<div className="container my-5 px-3" id="catalog-item-container">
-				<CatalogItemList title="Dịch vụ" model={props.model.services} />
-				<CatalogItemList title="Khoá học" model={props.model.courses} />
-				{/* <CatalogItemList title="Sản phẩm" model={props.model.products} /> */}
-			</div>
+			<CatalogItemList title="Dịch vụ" model={props.model.services} />
+			<CatalogItemList title="Khoá học" model={props.model.courses} />
+			{/* <CatalogItemList title="Sản phẩm" model={props.model.products} /> */}
 
 			{/* Enquiry */}
 			<EnquiryForm />

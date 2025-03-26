@@ -1,0 +1,29 @@
+.cardThumnail {
+	object-fit: cover;
+	object-position: 50%;
+	aspect-ratio: 1
+}
+
+.cardTitle {
+	color: var(--bs-success);
+	font-weight: bold;
+	margin-bottom: 0;
+	text-decoration: none;
+}
+
+@media (max-width: 768px) {
+	.card {
+		flex-direction: row;
+		align-items: start
+	}
+
+	.cardThumbnail {
+		width: 80px;
+		height: auto;
+		margin: 1rem;
+		margin-right: 0;
+		border: 1px solid var(--bs-border-color);
+		padding: .25rem;
+		border-radius: .5rem;
+	}
+}

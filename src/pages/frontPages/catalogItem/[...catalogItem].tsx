@@ -63,8 +63,8 @@ export const getServerSideProps = (async ({ params: currentParam }) => {
 	}
 
 	const routeParam = currentParam.catalogItem[0] as RouteParam;
-	const title = titleByRouteParam[routeParam];
 	const typeDisplayName = titleByRouteParam[routeParam];
+	let title = titleByRouteParam[routeParam];
 	let model: CatalogItemBasicModel[] | CatalogItemDetailModel;
 	if (currentParam.catalogItem[1] == null) {
 		const basicResponseDtos = await getCatalogItemListAsync({
@@ -79,7 +79,7 @@ export const getServerSideProps = (async ({ params: currentParam }) => {
 		}
 
 		const detailResponseDto = await getCatalogItemDetailAsync(id);
-
+		title = detailResponseDto.name;
 		model = createCatalogItemDetailModel(detailResponseDto);
 	}
 

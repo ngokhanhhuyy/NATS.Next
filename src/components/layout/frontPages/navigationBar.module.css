@@ -1,21 +1,14 @@
 .nav {
     --navbar-logo-img-filter: brightness(0) saturate(100%) invert(39%) sepia(90%) saturate(393%) hue-rotate(100deg) brightness(88%) contrast(89%);
-    --navbar-transition-duration: 0.3s;
-    --navbar-background-color: var(--bs-white);
+    --navbar-transition-duration: 3s;
+    --navbar-background-color-rgb: var(--bs-white-rgb);
+    --navbar-background-color: rgb(var(--navbar-background-color-rgb));
     --navbar-foreground-color: var(--bs-success);
-    backdrop-filter: blur(50px);
+    background: rgb(var(--navbar-background-color-rgb));
     height: var(--navbar-height);
-    transition: background-color var(--navbar-transition-duration) ease;
-}
-
-.nav::before {
-    content: "";
-    background-color: rgba(255, 255, 255, 0.8);
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
+    border: none;
+    overflow: hidden;
+    transition: filter var(--navbar-transition-duration) ease;
 }
 
 .logo {
@@ -23,7 +16,6 @@
     height: calc(var(--navbar-height) - 12px);
     padding: 5px;
     filter: var(--navbar-logo-img-filter);
-    transition: filter var(--navbar-transition-duration) ease;
 }
 
 .applicationShortName {
@@ -37,7 +29,7 @@
 .togglerButton {
     color: var(--navbar-foreground-color) !important;
     border-color: var(--navbar-foreground-color) !important;
-    transition: var(--navbar-transition-duration) ease !important;
+    transition: .15s ease;
 }
 
 .togglerButton:hover {
@@ -46,9 +38,8 @@
 }
 
 .navBarCollapse {
-    transition: .3s ease-in-out;
-    height: 100vh;
     overflow: hidden;
+    display: block !important;
 }
 
 .itemListContainer {
@@ -89,12 +80,18 @@
 }
 
 @media (max-width: 1200px) {
-    .nav {
-        height: auto !important;
+    .nav:has(.navBarCollapse:is(:global(.show))) {
+        height: fit-content;
     }
 
-    .navBarCollapse:not(:global(.show)) {
-        display: block;
-        height: 0;
+    .itemListContainer {
+        margin-top: .5rem;
     }
 }
+
+/* @supports (backdrop-filter: blur()) {
+    .nav {
+        backdrop-filter: blur(50px);
+        background-color: rgba(255, 255, 255, 0.8);
+    }
+} */

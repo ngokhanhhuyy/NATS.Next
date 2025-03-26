@@ -10,12 +10,12 @@ type SummaryItemListProps = {
 export default function SummaryItemList(props: SummaryItemListProps) {
 	// Computed.
 	function computeLinkClassName(): string {
-		return `col col-xl-3 col-md-6 col-12 p-3 d-flex flex-column\
+		return `col col-xl-3 col-md-6 col-12 d-flex flex-column\
 		 				align-items-center ${styles.link}`;
 	}
 
 	return (
-		<div className="container my-5">
+		<div className="container mb-3 p-4">
 			<div className="row g-3">
 				{props.model.map((item, index) => (
 					<Link
@@ -32,7 +32,7 @@ export default function SummaryItemList(props: SummaryItemListProps) {
 							alt={item.name}
 						/>
 
-						<span className="fs-3 text-center text-success mb-3">{item.name}</span>
+						<h2 className="text-center text-success mb-2">{item.name}</h2>
 
 						<p>{item.summaryContent}</p>
 					</Link>

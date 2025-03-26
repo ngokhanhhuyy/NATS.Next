@@ -21,7 +21,7 @@ export default function NavigationBar() {
 
   return (
     <nav
-      className={`navbar navbar-expand-xl fixed-top shadow fs-5 ${styles.nav}`}
+      className={`navbar navbar-expand-xl fixed-top shadow fs-5 p-0 ${styles.nav}`}
       data-bs-theme="light"
     >
       <div className="container">
@@ -43,7 +43,7 @@ export default function NavigationBar() {
         </Link>
 
         <button
-          className={`navbar-toggler fs-3 me-2 py-2 ${styles.togglerButton}`}
+          className={`navbar-toggler fs-3 me-2 my-0 py-2 ${styles.togglerButton}`}
           id="navbar-toggler-button"
           type="button"
           data-bs-toggle="collapse"
