@@ -53,7 +53,7 @@ export default function Footer() {
             </Link>
 
             {/* AboutUs */}
-            <Link href={routeUtils.getAboutUsRoutePath()}>
+            <Link href={routeUtils.getAboutUsIntroductionRoutePath()}>
               Về chúng tôi
             </Link>
 

@@ -10,6 +10,8 @@ import Footer from "@/components/layout/frontPages/footer";
 
 // Props.
 export type FrontPageLayoutProps = Readonly<{
+  title: string;
+  description: string;
   children: ReactNode | ReactNode[];
 }>;
 
@@ -17,6 +19,11 @@ export type FrontPageLayoutProps = Readonly<{
 export default function FrontPageLayout(props: FrontPageLayoutProps) {
   return (
     <>
+      <Head>
+        <title>{props.title}</title>
+        <meta name="description" content={props.description} />
+      </Head>
+
 			<PageLoadFinisher/>
       <NavigationBar />
       <main className={`flex-fill h-100 fade-animation fade-animation-reverse`}>

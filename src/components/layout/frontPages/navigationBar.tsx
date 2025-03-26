@@ -1,7 +1,4 @@
-<<<<<<< HEAD:src/components/frontPages/navigationBar.tsx
-=======
-import type { ReactNode } from "react";
->>>>>>> a75df80811d83d142c28532c745e93962b3468d7:src/components/layout/frontPages/navigationBar.tsx
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -9,10 +6,22 @@ import * as routeUtils from "@/utils/routeUtils";
 import styles from "./navigationBar.module.css";
 
 export default function NavigationBar() {
+  // States.
+  const [isContentVisible, setIsContentVisible] = useState<boolean>(false);
+
+  // Computed.
+  function computeNavBarCollapseClassName(): string {
+    let classNames = styles.navBarCollapse;
+    if (isContentVisible) {
+      classNames += " show";
+    }
+    
+    return classNames;
+  }
+
   return (
     <nav
       className={`navbar navbar-expand-xl fixed-top shadow fs-5 ${styles.nav}`}
-      id="navbar"
       data-bs-theme="light"
     >
       <div className="container">
@@ -32,74 +41,57 @@ export default function NavigationBar() {
             NATS
           </span>
         </Link>
+
         <button
           className={`navbar-toggler fs-3 me-2 py-2 ${styles.togglerButton}`}
           id="navbar-toggler-button"
           type="button"
-          data-bs-toggle="offcanvas"
-          data-bs-target="#navbar-content"
+          data-bs-toggle="collapse"
           aria-controls="navbar-content"
           aria-expanded="false"
           aria-label="Toggle navigation"
+          onClick={() => setIsContentVisible(isVisible => !isVisible)}
         >
           <i className="bi bi-list"></i>
         </button>
-        <div
-          className="offcanvas offcanvas-end"
-          tabIndex={-1}
-          id="navbar-content"
-          aria-labelledby="offcanvasNavbarLabel"
-        >
-          <div className="offcanvas-header">
-            <h5 className="offcanvas-title" id="offcanvasNavbarLabel">
-              Điều hướng
-            </h5>
-            <button
-              type="button"
-              className="btn-close"
-              data-bs-dismiss="offcanvas"
-              aria-label="Close">
-            </button>
-          </div>
-          <div className="offcanvas-body">
-            <ul className={`navbar-nav me-auto mb-2 mb-lg-0 ${styles.itemListContainer}`}>
-              {/* Home */}
-              <NavigationItem path={routeUtils.getHomeRoutePath()}>
-                Trang chủ
-              </NavigationItem>
+        
+        <div className={`collapse navbar-collapse ${computeNavBarCollapseClassName()}`}>
+          <ul className={`navbar-nav me-auto mb-2 mb-lg-0 ${styles.itemListContainer}`}>
+            {/* Home */}
+            <NavigationItem path={routeUtils.getHomeRoutePath()}>
+              Trang chủ
+            </NavigationItem>
 
-              {/* SummaryItem */}
-              <NavigationItem path={routeUtils.getSummaryItemsRoutePath()}>
-                Giới thiệu
-              </NavigationItem>
+            {/* SummaryItem */}
+            <NavigationItem path={routeUtils.getSummaryItemsRoutePath()}>
+              Giới thiệu
+            </NavigationItem>
 
-              {/* AboutUsIntroduction */}
-              <NavigationItem path={routeUtils.getAboutUsRoutePath()}>
-                Về chúng tôi
-              </NavigationItem>
+            {/* AboutUsIntroduction */}
+            <NavigationItem path={routeUtils.getAboutUsIntroductionRoutePath()}>
+              Về chúng tôi
+            </NavigationItem>
 
-              {/* CatalogItem - Services */}
-              <NavigationItem path={routeUtils.getServiceListRoutePath()}>
-                Dịch vụ
-              </NavigationItem>
+            {/* CatalogItem - Services */}
+            <NavigationItem path={routeUtils.getServiceListRoutePath()}>
+              Dịch vụ
+            </NavigationItem>
 
-              {/* CatalogItem - Course */}
-              <NavigationItem path={routeUtils.getCourseListRoutePath()}>
-                Khoá học
-              </NavigationItem>
+            {/* CatalogItem - Course */}
+            <NavigationItem path={routeUtils.getCourseListRoutePath()}>
+              Khoá học
+            </NavigationItem>
 
-              {/* CatalogItem - Product */}
-              <NavigationItem path={routeUtils.getProductListRoutePath()}>
-                Sản phẩm
-              </NavigationItem>
+            {/* CatalogItem - Product */}
+            <NavigationItem path={routeUtils.getProductListRoutePath()}>
+              Sản phẩm
+            </NavigationItem>
 
-<<<<<<< HEAD:src/components/frontPages/navigationBar.tsx
-              {/* Contacts */}
-              <NavigationItem path={routeUtils.getContactsRoutePath()}>
-                Liên hệ
-              </NavigationItem>
-            </ul>
-          </div>
+            {/* Contacts */}
+            <NavigationItem path={routeUtils.getContactsRoutePath()}>
+              Liên hệ
+            </NavigationItem>
+          </ul>
         </div>
       </div>
     </nav>
@@ -117,56 +109,6 @@ function NavigationItem(props: { path: string, children: React.ReactNode }) {
       (props.path !== "/" && pathName.startsWith(props.path))) {
       classNames.push("active");
     }
-=======
-                            {/* SummaryItem */}
-                            <NavigationItem path={routeUtils.getSummaryItemsRoutePath()}>
-                                Giới thiệu
-                            </NavigationItem>
-                            
-                            {/* AboutUsIntroduction */}
-                            <NavigationItem path={routeUtils.getAboutUsIntroductionRoutePath()}>
-                                Về chúng tôi
-                            </NavigationItem>
-                            
-                            {/* CatalogItem - Services */}
-                            <NavigationItem path={routeUtils.getServiceListRoutePath()}>
-                                Dịch vụ
-                            </NavigationItem>
-                            
-                            {/* CatalogItem - Course */}
-                            <NavigationItem path={routeUtils.getCourseListRoutePath()}>
-                                Khoá học
-                            </NavigationItem>
-                            
-                            {/* CatalogItem - Product */}
-                            {/* <NavigationItem path={routeUtils.getProductListRoutePath()}>
-                                Sản phẩm
-                            </NavigationItem> */}
-
-								{/* Contacts */}
-								<NavigationItem path={routeUtils.getContactsRoutePath()}>
-									Liên hệ
-								</NavigationItem>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</nav>
-	);
-}
-
-function NavigationItem(props: { path: string, children: ReactNode }) {
-	// Dependencies.
-	const pathName = usePathname();
-
-    // Computed.
-    const computeItemClassName = (): string => {
-        const classNames: string[] = [styles.link];
-        if ((pathName === "/" && props.path === "/") ||
-            (props.path !== "/" && pathName.startsWith(props.path))) {
-            classNames.push("active");
-        }
->>>>>>> a75df80811d83d142c28532c745e93962b3468d7:src/components/layout/frontPages/navigationBar.tsx
 
     return classNames.join(" ");
   };

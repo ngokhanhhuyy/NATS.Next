@@ -1,4 +1,3 @@
-import type { ReactElement, ReactNode } from "react";
 import Head from "next/head";
 import type { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import {
@@ -92,7 +91,7 @@ export const getServerSideProps = (async ({ params: currentParam }) => {
 // Component.
 function CatalogItemListPage(props: InferGetServerSidePropsType<typeof getServerSideProps>) {
 	return (
-		<FrontPageSubPageLayout>
+		<FrontPageSubPageLayout title={props.title} description="Description">
 			<Head>
 				<title>{props.title}</title>
 				<meta name="description" content="Giới thiệu về lĩnh vực hoạt động." />
@@ -106,13 +105,5 @@ function CatalogItemListPage(props: InferGetServerSidePropsType<typeof getServer
 		</FrontPageSubPageLayout>
 	);
 }
-
-CatalogItemListPage.getLayout = (page: ReactElement): ReactNode => {
-	return (
-		<FrontPageSubPageLayout title={props.title}>
-			{page}
-		</FrontPageSubPageLayout>
-	);
-};
 
 export default CatalogItemListPage;

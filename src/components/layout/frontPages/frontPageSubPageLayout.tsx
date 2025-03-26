@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+
 import styles from "./frontPageSubPageLayout.module.css";
 
 // Layout components.
@@ -11,6 +13,14 @@ type FrontPageSubPageLayoutProps = {
 
 // Component.
 export default function FrontPageSubPageLayout(props: FrontPageSubPageLayoutProps) {
+  // States.
+  const [key, setKey] = useState<number>(0);
+
+  // Effect.
+  useEffect(() => {
+    setKey(key => key + 1);
+  }, [props.children]);
+
 	// Computed.
 	const computeOuterContainerClassName = (): string => {
 		return `container-fluid bg-success-subtle text-white border-bottom\
@@ -18,12 +28,12 @@ export default function FrontPageSubPageLayout(props: FrontPageSubPageLayoutProp
 	};
 
   return (
-    <FrontPageLayout>
+    <FrontPageLayout title={props.title} description={props.description} key={key}>
       <div
         className={computeOuterContainerClassName()}
       >
         <div className="container p-3">
-          <span className="fs-1">{document.title}</span>
+          <span className="fs-1">{props.title}</span>
         </div>
       </div>
       {props.children}

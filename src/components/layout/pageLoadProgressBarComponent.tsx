@@ -8,10 +8,18 @@ const progressBarClassNames = {
   hiding: styles.hiding
 };
 
-<<<<<<< HEAD:src/components/pageLoadProgressBarComponent.tsx
 const PageLoadProgressBarComponent = () => {
   // Dependencies.
   const store = usePageLoadProgressBarStore(store => store);
+
+  // Computed.
+  function computeProgressBarClassName(): string {
+    return [
+      "progress-bar progress-bar-striped progress-bar-animated h-100",
+      styles.progressBar,
+      progressBarClassNames[store.phase]
+    ].join(" ");
+  }
 
   return (
     <div
@@ -23,8 +31,7 @@ const PageLoadProgressBarComponent = () => {
       aria-valuemax={100}
     >
       <div
-        className={`progress-bar progress-bar-striped progress-bar-animated h-100\
-                  ${styles.progressBar} ${progressBarClassNames[store.phase]}`}
+        className={computeProgressBarClassName()}
         style={{ width: `${store.percentage}%` }}
       />
     </div>
@@ -32,26 +39,3 @@ const PageLoadProgressBarComponent = () => {
 };
 
 export default PageLoadProgressBarComponent;
-=======
-export default function PageLoadProgressBarComponent() {
-	// Dependencies.
-	const store = usePageLoadProgressBarStore(store => store);
-
-	return (
-			<div
-					className={`progress w-100 rounded-0 ${styles.progress}`}
-					role="progressbar"
-					aria-label="Animated striped example"
-					aria-valuenow={store.percentage}
-					aria-valuemin={0}
-					aria-valuemax={100}
-			>
-				<div
-						className={`progress-bar progress-bar-striped progress-bar-animated h-100
-                            ${styles.progressBar} ${progressBarClassNames[store.phase]}`}
-						style={{ width: `${store.percentage}%` }}
-				/>
-			</div>
-	);
-};
->>>>>>> a75df80811d83d142c28532c745e93962b3468d7:src/components/layout/pageLoadProgressBarComponent.tsx

@@ -26,58 +26,58 @@ import EnquiryForm from "@/components/layout/frontPages/enquiryFormComponent";
 
 // Props.
 type HomeProps = {
-  model: {
-    sliderItems: SliderItemDetailModel[];
-    summaryItems: SummaryItemDetailModel[];
-    aboutUsIntroduction: AboutUsIntroductionDetailModel;
-    services: CatalogItemBasicModel[];
-    courses: CatalogItemBasicModel[];
-    products: CatalogItemBasicModel[];
-    contacts: ContactDetailModel[];
-    generalSettings: GeneralSettingsDetailModel;
-  };
+	model: {
+		sliderItems: SliderItemDetailModel[];
+		summaryItems: SummaryItemDetailModel[];
+		aboutUsIntroduction: AboutUsIntroductionDetailModel;
+		services: CatalogItemBasicModel[];
+		courses: CatalogItemBasicModel[];
+		products: CatalogItemBasicModel[];
+		contacts: ContactDetailModel[];
+		generalSettings: GeneralSettingsDetailModel;
+	};
 };
 
 export async function getServerSideProps() {
-  const [
-    sliderItemResponseDtos,
-    summaryItemResponseDtos,
-    aboutUsIntroductionResponseDto,
-    catalogItemResponseDtos,
-    contactResponseDtos,
-    generalSettingsResponseDto,
-  ] = await Promise.all([
-    getSliderItemListAsync(),
-    getSummaryItemListAsync(),
-    getAboutUsIntroductionAsync(),
-    getCatalogItemListAsync(),
-    getContactListAsync(),
-    getGeneralSettingsAsync(),
-  ]);
+	const [
+		sliderItemResponseDtos,
+		summaryItemResponseDtos,
+		aboutUsIntroductionResponseDto,
+		catalogItemResponseDtos,
+		contactResponseDtos,
+		generalSettingsResponseDto,
+	] = await Promise.all([
+		getSliderItemListAsync(),
+		getSummaryItemListAsync(),
+		getAboutUsIntroductionAsync(),
+		getCatalogItemListAsync(),
+		getContactListAsync(),
+		getGeneralSettingsAsync(),
+	]);
 
-  const model = {
-    sliderItems: sliderItemResponseDtos.map((dto) => createSliderItemDetailModel(dto)),
-    summaryItems: summaryItemResponseDtos.map((dto) => createSummaryItemDetailModel(dto)),
-    aboutUsIntroduction: createAboutUsIntroductionDetailModel(aboutUsIntroductionResponseDto),
-    services: catalogItemResponseDtos
-      .filter((dto) => dto.type === CatalogItemType.Service)
-      .map((dto) => createCatalogItemBasicModel(dto)),
-    courses: catalogItemResponseDtos
-      .filter((dto) => dto.type === CatalogItemType.Course)
-      .map((dto) => createCatalogItemBasicModel(dto)),
-    products: catalogItemResponseDtos
-      .filter((dto) => dto.type === CatalogItemType.Product)
-      .map((dto) => createCatalogItemBasicModel(dto)),
-    contacts: contactResponseDtos.map((dto) => createContactDetailModel(dto)),
-    generalSettings: createGeneralSettingsDetailModel(generalSettingsResponseDto),
-  };
+	const model = {
+		sliderItems: sliderItemResponseDtos.map((dto) => createSliderItemDetailModel(dto)),
+		summaryItems: summaryItemResponseDtos.map((dto) => createSummaryItemDetailModel(dto)),
+		aboutUsIntroduction: createAboutUsIntroductionDetailModel(aboutUsIntroductionResponseDto),
+		services: catalogItemResponseDtos
+			.filter((dto) => dto.type === CatalogItemType.Service)
+			.map((dto) => createCatalogItemBasicModel(dto)),
+		courses: catalogItemResponseDtos
+			.filter((dto) => dto.type === CatalogItemType.Course)
+			.map((dto) => createCatalogItemBasicModel(dto)),
+		products: catalogItemResponseDtos
+			.filter((dto) => dto.type === CatalogItemType.Product)
+			.map((dto) => createCatalogItemBasicModel(dto)),
+		contacts: contactResponseDtos.map((dto) => createContactDetailModel(dto)),
+		generalSettings: createGeneralSettingsDetailModel(generalSettingsResponseDto),
+	};
 
-  return { props: { model } };
+	return { props: { model } };
 }
 
 // Component.
 export default function HomePage(props: HomeProps) {
-  return (
+	return (
 		<div className="container-fluid p-0">
 			<SliderItemList model={props.model.sliderItems} />
 
@@ -144,11 +144,13 @@ export default function HomePage(props: HomeProps) {
 			{/* Enquiry */}
 			<EnquiryForm />
 		</div>
-  );
+	);
 }
 
 HomePage.getLayout = (page: ReactElement): ReactNode => {
-	return <FrontPageLayout title="Trang chủ" description="Trang chủ">
-		{page}
-	</FrontPageLayout>;
+	return (
+		<FrontPageLayout title="Trang chủ" description="Trang chủ">
+			{page}
+		</FrontPageLayout>
+	);
 };

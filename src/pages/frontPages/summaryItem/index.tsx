@@ -46,18 +46,18 @@ export default function SummaryItemPage(props: SummaryItemPageProps) {
 	}, []);
 
 	return (
-			<FrontPageSubPageLayout title="Giới thiệu">
-				<Head>
-					<title>Giới thiệu</title>
-					<meta name="description" content="Giới thiệu về lĩnh vực hoạt động."/>
-				</Head>
+		<FrontPageSubPageLayout title="Giới thiệu" description="Description">
+			<Head>
+				<title>Giới thiệu</title>
+				<meta name="description" content="Giới thiệu về lĩnh vực hoạt động." />
+			</Head>
 
-				<div className="container py-4 mt-4">
-					{props.model.map((item, index) => (
-							<Item model={item} index={index} key={index}/>
-					))}
-				</div>
-			</FrontPageSubPageLayout>
+			<div className="container py-4 mt-4">
+				{props.model.map((item, index) => (
+					<Item model={item} index={index} key={index} />
+				))}
+			</div>
+		</FrontPageSubPageLayout>
 	);
 }
 
@@ -93,33 +93,37 @@ function Item(props: ItemProps) {
 	}
 
 	return (
+		<div
+			className={`row g-5 justify-content-center mb-5 ${styles.itemRow}`}
+			id={props.model.id.toString()}
+		>
+			{/* Thumbnail */}
 			<div
-					className={`row g-5 justify-content-center mb-5 ${styles.itemRow}`}
-					id={props.model.id.toString()}
+				className={[
+					"col col-lg-auto col-md-10 col-12 d-flex justify-content-center align-items-start",
+					computeThumbnailColumnClassName()
+				].join(" ")}
 			>
-				{/* Thumbnail */}
-				<div className={`col col-lg-auto col-md-10 col-12 d-flex justify-content-center
-                            align-items-start ${computeThumbnailColumnClassName()}`}>
-					<img
-							src={props.model.thumbnailUrl}
-							className="rounded-circle shadow"
-							style={computeThumbnailStyle()}
-							alt={props.model.name}
-					/>
-				</div>
-
-				{/* Detail */}
-				<div className={`col col-lg col-md-10 col-12 ${computeDetailColumnClassName()}`}>
-					{/* Name */}
-					<div className={`fs-2 text-success mb-3 ${computeNameClassName()}`}>
-						{props.model.name}
-					</div>
-
-					{/* DetailContent */}
-					{props.model.detailContent.split(/\r?\n/).map((paragraph, index) => (
-							<p key={index}>{paragraph}</p>
-					))}
-				</div>
+				<img
+					src={props.model.thumbnailUrl}
+					className="rounded-circle shadow"
+					style={computeThumbnailStyle()}
+					alt={props.model.name}
+				/>
 			</div>
+
+			{/* Detail */}
+			<div className={`col col-lg col-md-10 col-12 ${computeDetailColumnClassName()}`}>
+				{/* Name */}
+				<div className={`fs-2 text-success mb-3 ${computeNameClassName()}`}>
+					{props.model.name}
+				</div>
+
+				{/* DetailContent */}
+				{props.model.detailContent.split(/\r?\n/).map((paragraph, index) => (
+					<p key={index}>{paragraph}</p>
+				))}
+			</div>
+		</div>
 	);
 }
