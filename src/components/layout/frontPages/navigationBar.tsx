@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, ReactNode } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -82,10 +82,10 @@ export default function NavigationBar() {
               Khoá học
             </NavigationItem>
 
-            {/* CatalogItem - Product */}
-            <NavigationItem path={routeUtils.getProductListRoutePath()}>
-              Sản phẩm
-            </NavigationItem>
+            {/*/!* CatalogItem - Product *!/*/}
+            {/*<NavigationItem path={routeUtils.getProductListRoutePath()}>*/}
+            {/*  Sản phẩm*/}
+            {/*</NavigationItem>*/}
 
             {/* Contacts */}
             <NavigationItem path={routeUtils.getContactsRoutePath()}>
@@ -98,7 +98,7 @@ export default function NavigationBar() {
   );
 }
 
-function NavigationItem(props: { path: string, children: React.ReactNode }) {
+function NavigationItem(props: { path: string, children: ReactNode }) {
   // Dependencies.
   const pathName = usePathname();
 

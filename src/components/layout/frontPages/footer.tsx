@@ -32,10 +32,6 @@ export default function Footer() {
     });
   }, []);
 
-  if (!model) {
-    return null;
-  }
-
   return (
     <footer className={`container-fluid bg-dark ${styles.footer}`} id="footer">
       <div className="container text-white">
@@ -90,7 +86,7 @@ export default function Footer() {
             <span className="fw-bold fs-5 opacity-75">
               Liên hệ
             </span>
-            {model.contacts.map(contact => (
+            {model?.contacts.map(contact => (
               <Contact model={contact} key={contact.id} />
             ))}
           </div>
@@ -99,8 +95,8 @@ export default function Footer() {
           {/* Logo */}
           <div className="col d-flex flex-column justify-content-center align-items-center">
             <div
-              className={`border border-4 rounded-circle d-flex justify-content-center
-                        align-items-center ${styles.logoContainer}`}
+              className={"border border-4 rounded-circle d-flex justify-content-center " +
+                        `align-items-center ${styles.logoContainer}`}
             >
               <Image
                 src={getPhotoUrl("/images/main-logo-transparent-white.png")}
@@ -111,7 +107,7 @@ export default function Footer() {
             </div>
 
             <div className="fw-bold fs-5 text-center mt-3 text-white">
-              {model.generalSettings.applicationName}
+              {model?.generalSettings.applicationName}
             </div>
           </div>
 

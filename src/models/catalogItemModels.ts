@@ -48,7 +48,7 @@ const typeDisplayNames: Record<CatalogItemType, string> = {
 };
 
 function createBasic(responseDto: BasicResponseDto): BasicModel {
-	let thumbnailUrl = "https://placehold.co/512x512";
+	let thumbnailUrl = "https://placehold.co/800x600";
 	if (responseDto.type !== CatalogItemType.Course && responseDto.thumbnailUrl) {
 		thumbnailUrl = responseDto.thumbnailUrl;
 	}
@@ -76,7 +76,7 @@ function createDetail(responseDto: DetailResponseDto): DetailModel {
 	let thumbnailUrl: string | null = responseDto.thumbnailUrl;
 	let photosAsPlaceholders = false;
 	if (responseDto.type === CatalogItemType.Course && responseDto.thumbnailUrl) {
-		thumbnailUrl = "https://placehold.co/512x512";
+		thumbnailUrl = "https://placehold.co/800x600";
 		photosAsPlaceholders = true;
 	}
 
@@ -110,7 +110,7 @@ function createDetailPhoto(
 		asPlaceholder: boolean = false): DetailPhotoModel {
 	let url: string = responseDto.url;
 	if (asPlaceholder) {
-		url = "https://placehold.co/512x512";
+		url = "https://placehold.co/800x600";
 	}
 
 	return {

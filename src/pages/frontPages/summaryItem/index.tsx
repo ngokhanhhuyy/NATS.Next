@@ -1,4 +1,4 @@
-import { useEffect, type CSSProperties } from "react";
+import { useState, useEffect, type CSSProperties } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import type { GetServerSideProps } from "next";
@@ -17,6 +17,7 @@ type SummaryItemPageProps = {
 type ItemProps = {
 	model: SummaryItemDetailModel;
 	index: number;
+	isCurrentId: boolean;
 }
 
 export const getServerSideProps = (async () => {
@@ -34,10 +35,20 @@ export default function SummaryItemPage(props: SummaryItemPageProps) {
 	// Dependencies.
 	const router = useRouter();
 
+	// States.
+	const [currentItemId, setCurrentItemId] = useState<number | null>(() => null);
+
 	// Effect.
 	useEffect(() => {
 		if (router.asPath.includes("#")) {
-			const itemId = router.asPath.split("#")[0];
+			const itemId = router.asPath.split("#")[1];
+			const parsedItemId = parseInt(itemId);
+			if (isNaN(parsedItemId) || !props.model.map(item => item.id).includes(parsedItemId)) {
+				return;
+			}
+
+			setCurrentItemId(parsedItemId);
+
 			const itemElement = document.getElementById(itemId);
 			if (itemElement) {
 				itemElement.scrollIntoView({ behavior: "smooth" });
@@ -52,9 +63,15 @@ export default function SummaryItemPage(props: SummaryItemPageProps) {
 				<meta name="description" content="Giới thiệu về lĩnh vực hoạt động." />
 			</Head>
 
+			{currentItemId}
 			<div className="container p-4 py-5">
 				{props.model.map((item, index) => (
-					<Item model={item} index={index} key={index} />
+					<Item
+						model={item}
+						index={index}
+						isCurrentId={currentItemId === item.id}
+						key={index}
+					/>
 				))}
 			</div>
 		</FrontPageSubPageLayout>
@@ -63,6 +80,16 @@ export default function SummaryItemPage(props: SummaryItemPageProps) {
 
 function Item(props: ItemProps) {
 	// Computed.
+	function computeContainerClassName(): string {
+		const classList = [
+			"row gx-5 gy-3 mb-3 justify-content-center",
+			styles.itemRow,
+			props.isCurrentId && styles.blinkingAnimation
+		];
+
+		return classList.filter(name => name).join(" ");
+	}
+
 	function computeThumbnailStyle(): CSSProperties {
 		return {
 			width: 250,
@@ -93,10 +120,7 @@ function Item(props: ItemProps) {
 	}
 
 	return (
-		<div
-			className={`row gx-5 gy-3 mb-3 justify-content-center ${styles.itemRow}`}
-			id={props.model.id.toString()}
-		>
+		<div className={computeContainerClassName()} id={props.model.id.toString()}>
 			{/* Thumbnail */}
 			<div
 				className={[

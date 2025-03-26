@@ -60,7 +60,6 @@ input:not([type="checkbox"]):not(.is-invalid):not(.is-valid),
 textarea:not(.is-invalid):not(.is-valid),
 select:not(.is-invalid):not(.is-valid) {
     color: inherit !important;
-    background-color: rgba(var(--bs-primary-rgb), 0.01);
 }
 
 input:not([type="checkbox"]):not(.is-invalid):not(.is-valid):focus,
@@ -73,12 +72,14 @@ input:not([type="checkbox"]):is(.is-invalid),
 textarea:is(.is-invalid),
 select:is(.is-invalid) {
     color: var(--bs-danger-text-emphasis) !important;
+    background-color: rgba(var(--bs-danger-rgb), 0.1) !important;
 }
 
 input:not([type="checkbox"]):is(.is-valid),
 textarea:is(.is-valid),
 select:is(.is-valid) {
     color: var(--bs-success-text-emphasis) !important;
+    background-color: rgba(var(--bs-success-rgb), 0.1) !important;
 }
 
 input[type="checkbox"], select {

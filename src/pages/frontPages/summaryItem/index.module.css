@@ -1,3 +1,24 @@
 .itemRow {
     scroll-margin-top: calc(var(--navbar-height));
 }
+
+.blinkingAnimation {
+    animation-name: blinking;
+    animation-duration: .5s;
+    animation-iteration-count: 5;
+    transform-origin: 50% 50%;
+}
+
+@keyframes blinking {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.02);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
